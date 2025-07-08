@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Asset Tracker</title>
+</head>
+<body>
+    <h1>Asset Tracker - Devices</h1>
+    <ul>
+    {% for device_id, device in devices.items() %}
+        <li><a href="{{ url_for('device_page', device_id=device_id) }}">{{ device.name }} ({{ device_id }})</a></li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

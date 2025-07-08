@@ -7,11 +7,14 @@ HISTORY_FILE = "history.json"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+app = Flask(__name__)
+
+
+
+
 def get_data_path(filename):
     return os.path.join(BASE_DIR, filename)
 
-
-app = Flask(__name__)
 
 def load_history():
     history_path = get_data_path(HISTORY_FILE)
@@ -104,6 +107,11 @@ def checkin_device(device_id):
     save_history(history)
     save_devices(devices)
     return "", 204
+
+@app.route("/")
+def home():
+    devices = load_devices()
+    return render_template("index.html", devices=devices)
 
 from waitress import serve
 
