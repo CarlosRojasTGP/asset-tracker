@@ -33,7 +33,12 @@
 <h3>Check-in / Check-out History</h3>
 <ul>
     {% for record in history %}
-        <li>{{ record.timestamp }} - <strong>{{ record.action.title() }}</strong> by {{ record.user }}</li>
+        <li>
+            {{ record.timestamp }} - <strong>{{ record.action.title() }}</strong>
+            {% if record.action == 'checkin' %}
+                by {{ record.user }}
+            {% endif %}
+        </li>
     {% else %}
         <li>No history available.</li>
     {% endfor %}
