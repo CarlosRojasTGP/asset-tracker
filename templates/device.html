@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ device.name }}</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .info { border: 2px solid #1d889b; padding: 15px; border-radius: 10px; max-width: 400px; }
+    </style>
+</head>
+<body>
+    <h1>{{ device.name }}</h1>
+    <div class="info">
+        <p><strong>Model:</strong> {{ device.model }}</p>
+        <p><strong>Serial:</strong> {{ device.serial }}</p>
+        <p><strong>Status:</strong> {{ device.status }}</p>
+        <p><strong>Last User:</strong> {{ device.last_user }}</p>
+        <p><strong>Last Updated (Used):</strong> {{ device.last_updated }}</p>
+    </div>
+
+    <div>
+    <h3>Manage Device</h3>
+    <button onclick="checkOut()">Check Out</button>
+    <button onclick="checkIn()">Check In</button>
+</div>
+
+<h3>Device QR Code</h3>
+<img src="{{ url_for('static', filename='qrcodes/' + device_id + '.png') }}" alt="QR Code">
+
+<h3>Check-in / Check-out History</h3>
+<ul>
+    {% for record in history %}
+        <li>{{ record.timestamp }} - <strong>{{ record.action.title() }}</strong> by {{ record.user }}</li>
+    {% else %}
+        <li>No history available.</li>
+    {% endfor %}
+</ul>
+
+<script>
+function promptUser(action) {
+    let user = prompt("Please enter your name:");
+    if (!user) {
+        alert("Name is required to " + action);
+        return null;
+    }
+    return user;
+}
+
+function checkOut() {
+    fetch(window.location.pathname + '/checkout', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({})
+    }).then(() => location.reload());
+}
+
+function checkIn() {
+    let user = promptUser("check in");
+    if (!user) return;
+    fetch(window.location.pathname + '/checkin', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ user: user })
+    }).then(() => location.reload());
+}
+</script>
+
+</body>
+</html>
