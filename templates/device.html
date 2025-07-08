@@ -13,7 +13,11 @@
         <p><strong>Model:</strong> {{ device.model }}</p>
         <p><strong>Serial:</strong> {{ device.serial }}</p>
         <p><strong>Status:</strong> {{ device.status }}</p>
-        <p><strong>Last User:</strong> {{ device.last_user }}</p>
+
+{% if device.status == "In Use" %}
+    <p><strong>Last User:</strong> {{ device.last_user }}</p>
+{% endif %}
+
         <p><strong>Last Updated (Used):</strong> {{ device.last_updated }}</p>
     </div>
 
