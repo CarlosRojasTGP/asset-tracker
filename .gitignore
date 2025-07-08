@@ -1,6 +1,5 @@
 # Ignore data files and virtual environment
-devices.json
-history.json
+
 venv/
 __pycache__/
 *.pyc
