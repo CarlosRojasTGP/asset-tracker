@@ -5,23 +5,30 @@ import os
 
 HISTORY_FILE = "history.json"
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+def get_data_path(filename):
+    return os.path.join(BASE_DIR, filename)
+
+
 app = Flask(__name__)
 
 def load_history():
-    if not os.path.exists(HISTORY_FILE):
+    history_path = get_data_path(HISTORY_FILE)
+    if not os.path.exists(history_path):
         return []
-    with open(HISTORY_FILE, "r") as f:
+    with open(history_path, "r") as f:
         return json.load(f)
 
 def save_history(history):
-    with open(HISTORY_FILE, "w") as f:
+    with open(get_data_path(HISTORY_FILE), "w") as f:
         json.dump(history, f, indent=4)
 
 
 #Loading the sample-test devices from the devices.json.
 def get_device_data(device_id):
     try:
-        with open("devices.json") as f:
+        with open(get_data_path("devices.json")) as f:
             devices = json.load(f)
         return devices.get(device_id)
     except Exception:
@@ -42,11 +49,11 @@ def device_page(device_id):
 
 # Helper to load and save the devices.json file
 def load_devices():
-    with open("devices.json") as f:
+    with open(get_data_path("devices.json")) as f:
         return json.load(f)
 
 def save_devices(data):
-    with open("devices.json", "w") as f:
+    with open(get_data_path("devices.json")) as f:
         json.dump(data, f, indent=4)
 
 @app.route("/device/<device_id>/checkout", methods=["POST"])
