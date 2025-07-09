@@ -1,90 +1,41 @@
 from flask import Flask, render_template, abort, request
 from datetime import datetime
-import json
-import os
-
-HISTORY_FILE = "history.json"
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+from models import db, Device, History
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///assets.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+db.init_app(app)  # Initialize db with app here
 
-
-
-def get_data_path(filename):
-    return os.path.join(BASE_DIR, filename)
-
-
-def load_history():
-    history_path = get_data_path(HISTORY_FILE)
-    if not os.path.exists(history_path):
-        return []
-    with open(history_path, "r") as f:
-        return json.load(f)
-
-def save_history(history):
-    with open(get_data_path(HISTORY_FILE), "w") as f:
-        json.dump(history, f, indent=4)
-
-
-#Loading the sample-test devices from the devices.json.
-def get_device_data(device_id):
-    try:
-        with open(get_data_path("devices.json")) as f:
-            devices = json.load(f)
-        return devices.get(device_id)
-    except Exception:
-        return None
+# === Routes ===
 
 @app.route("/device/<device_id>")
 def device_page(device_id):
-    device = get_device_data(device_id)
+    device = Device.query.get(device_id)
     if not device:
         abort(404)
 
-    history = [h for h in load_history() if h["device_id"] == device_id]
-
-    # Optionally sort by timestamp descending (latest first)
-    history.sort(key=lambda x: x["timestamp"], reverse=True)
-
+    history = History.query.filter_by(device_id=device_id).order_by(History.timestamp.desc()).all()
     return render_template("device.html", device=device, device_id=device_id, history=history)
-
-# Helper to load and save the devices.json file
-def load_devices():
-    with open(get_data_path("devices.json")) as f:
-        return json.load(f)
-
-def save_devices(data):
-    with open(get_data_path("devices.json")) as f:
-        json.dump(data, f, indent=4)
 
 @app.route("/device/<device_id>/checkout", methods=["POST"])
 def checkout_device(device_id):
-    devices = load_devices()
-    device = devices.get(device_id)
+    device = Device.query.get(device_id)
     if not device:
         abort(404)
 
-    device["status"] = "Checked Out (Available)"
-    device["last_updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    device.status = "Checked Out (Available)"
+    device.last_updated = datetime.utcnow()
 
-#Appending to History
-    history = load_history() 
-    history.append({
-        "device_id": device_id,
-        "action": "checkout",
-        "user": device.get("last_user", "Unknown"),
-        "timestamp": device["last_updated"]
-    })
-    save_history(history)
-    save_devices(devices)
-    return "", 204  # No content, just success
+    db.session.add(device)
+    db.session.add(History(device_id=device_id, action="checkout", user=device.last_user or "Unknown"))
+    db.session.commit()
+    return "", 204
 
 @app.route("/device/<device_id>/checkin", methods=["POST"])
 def checkin_device(device_id):
-    devices = load_devices()
-    device = devices.get(device_id)
+    device = Device.query.get(device_id)
     if not device:
         abort(404)
 
@@ -92,27 +43,21 @@ def checkin_device(device_id):
     if not user:
         abort(400)
 
-    device["status"] = "In Use"
-    device["last_user"] = user
-    device["last_updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    device.status = "In Use"
+    device.last_user = user
+    device.last_updated = datetime.utcnow()
 
-    history = load_history()
-    history.append({
-        "device_id": device_id,
-        "action": "checkin",
-        "user": user,
-        "timestamp": device["last_updated"]
-    })
-
-    save_history(history)
-    save_devices(devices)
+    db.session.add(device)
+    db.session.add(History(device_id=device_id, action="checkin", user=user))
+    db.session.commit()
     return "", 204
 
 @app.route("/")
 def home():
-    devices = load_devices()
-    return render_template("index.html", devices=devices)
+    devices = Device.query.all()
+    return render_template("index.html", devices={d.id: d for d in devices})
 
+# === Deployment ===
 from waitress import serve
 
 if __name__ == "__main__":
