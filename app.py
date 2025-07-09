@@ -44,16 +44,20 @@ def checkout_device(device_id):
     if not device:
         abort(404)
 
-    # 🔄 Use timezone-aware Toronto time
-    now = datetime.now(eastern)
-
+    now = datetime.now(eastern)  # <--- use Toronto time
     device.status = "Checked Out (Available)"
     device.last_updated = now
 
     db.session.add(device)
-    db.session.add(History(device_id=device_id, action="checkout", user=device.last_user or "Unknown", timestamp=now))
+    db.session.add(History(
+        device_id=device_id,
+        action="checkout",
+        user=device.last_user or "Unknown",
+        timestamp=now  # <--- force Toronto time
+    ))
     db.session.commit()
     return "", 204
+
 
 @app.route("/device/<device_id>/checkin", methods=["POST"])
 def checkin_device(device_id):
@@ -65,15 +69,18 @@ def checkin_device(device_id):
     if not user:
         abort(400)
 
-    # 🔄 Use timezone-aware Toronto time
-    now = datetime.now(eastern)
-
+    now = datetime.now(eastern)  # <--- use Toronto time
     device.status = "In Use"
     device.last_user = user
     device.last_updated = now
 
     db.session.add(device)
-    db.session.add(History(device_id=device_id, action="checkin", user=user, timestamp=now))
+    db.session.add(History(
+        device_id=device_id,
+        action="checkin",
+        user=user,
+        timestamp=now  # <--- force Toronto time
+    ))
     db.session.commit()
     return "", 204
 
