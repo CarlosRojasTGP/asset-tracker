@@ -25,11 +25,15 @@ def device_page(device_id):
     # Prepare formatted history list with fixed timezone
     history_display = []
     for record in history:
+
+
         timestamp = record.timestamp
         if timestamp.tzinfo is None:
-            timestamp = pytz.utc.localize(timestamp)
-        local_time = timestamp.astimezone(eastern)
-        formatted_time = local_time.strftime("%Y-%m-%d %I:%M %p")
+    # Local naive timestamp is actually in Toronto time, so localize to Toronto
+            timestamp = eastern.localize(timestamp)
+# Now timestamp is timezone-aware in Toronto time, so format directly
+        formatted_time = timestamp.strftime("%Y-%m-%d %I:%M %p")
+
         history_display.append({
             "timestamp": formatted_time,
             "action": record.action,
