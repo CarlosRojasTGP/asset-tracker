@@ -2,3 +2,4 @@ Flask
 Flask-SQLAlchemy
 waitress
 qrcode[pil]
+pytz

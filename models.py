@@ -1,7 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import datetime, timezone
 
 db = SQLAlchemy()
+
+def current_time():
+    return datetime.now(timezone.utc).replace(microsecond=0)
 
 class Device(db.Model):
     __tablename__ = 'devices'
@@ -11,7 +14,7 @@ class Device(db.Model):
     model = db.Column(db.String)
     status = db.Column(db.String)
     last_user = db.Column(db.String)
-    last_updated = db.Column(db.DateTime, default=datetime.utcnow)
+    last_updated = db.Column(db.DateTime, default=current_time)
 
 class History(db.Model):
     __tablename__ = 'history'
@@ -19,4 +22,4 @@ class History(db.Model):
     device_id = db.Column(db.String, db.ForeignKey('devices.id'))
     action = db.Column(db.String)
     user = db.Column(db.String)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, default=current_time)

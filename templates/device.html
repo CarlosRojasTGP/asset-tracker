@@ -14,64 +14,64 @@
         <p><strong>Serial:</strong> {{ device.serial }}</p>
         <p><strong>Status:</strong> {{ device.status }}</p>
 
-{% if device.status == "In Use" %}
-    <p><strong>Last User:</strong> {{ device.last_user }}</p>
-{% endif %}
+        {% if device.status == "In Use" %}
+            <p><strong>Last User:</strong> {{ device.last_user }}</p>
+        {% endif %}
 
-        <p><strong>Last Updated (Used):</strong> {{ device.last_updated }}</p>
+        <p><strong>Last Updated (Used):</strong> {{ device.last_updated.strftime("%Y-%m-%d %I:%M %p") }}</p>
     </div>
 
     <div>
-    <h3>Manage Device</h3>
-    <button onclick="checkOut()">Check Out</button>
-    <button onclick="checkIn()">Check In</button>
-</div>
+        <h3>Manage Device</h3>
+        <button onclick="checkOut()">Check Out</button>
+        <button onclick="checkIn()">Check In</button>
+    </div>
 
-<h3>Device QR Code</h3>
-<img src="{{ url_for('static', filename='qrcodes/' + device_id + '.png') }}" alt="QR Code">
+    <h3>Device QR Code</h3>
+    <img src="{{ url_for('static', filename='qrcodes/' + device_id + '.png') }}" alt="QR Code">
 
-<h3>Check-in / Check-out History</h3>
-<ul>
-    {% for record in history %}
-        <li>
-            {{ record.timestamp }} - <strong>{{ record.action.title() }}</strong>
-            {% if record.action == 'checkin' %}
-                by {{ record.user }}
-            {% endif %}
-        </li>
-    {% else %}
-        <li>No history available.</li>
-    {% endfor %}
-</ul>
+    <h3>Check-in / Check-out History</h3>
+    <ul>
+        {% for record in history %}
+            <li>
+                {{ record.timestamp.strftime("%Y-%m-%d %I:%M %p") }} -
+                <strong>{{ record.action.title() }}</strong>
+                {% if record.user %}
+                    by {{ record.user }}
+                {% endif %}
+            </li>
+        {% else %}
+            <li>No history available.</li>
+        {% endfor %}
+    </ul>
 
-<script>
-function promptUser(action) {
-    let user = prompt("Please enter your name:");
-    if (!user) {
-        alert("Name is required to " + action);
-        return null;
+    <script>
+    function promptUser(action) {
+        let user = prompt("Please enter your name:");
+        if (!user) {
+            alert("Name is required to " + action);
+            return null;
+        }
+        return user;
     }
-    return user;
-}
 
-function checkOut() {
-    fetch(window.location.pathname + '/checkout', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({})
-    }).then(() => location.reload());
-}
+    function checkOut() {
+        fetch(window.location.pathname + '/checkout', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({})
+        }).then(() => location.reload());
+    }
 
-function checkIn() {
-    let user = promptUser("check in");
-    if (!user) return;
-    fetch(window.location.pathname + '/checkin', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ user: user })
-    }).then(() => location.reload());
-}
-</script>
-
+    function checkIn() {
+        let user = promptUser("check in");
+        if (!user) return;
+        fetch(window.location.pathname + '/checkin', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ user: user })
+        }).then(() => location.reload());
+    }
+    </script>
 </body>
 </html>
