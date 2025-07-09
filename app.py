@@ -1,12 +1,12 @@
 from flask import Flask, render_template, abort, request
 from datetime import datetime
-import pytz
+import pytz #for timezone
 from pytz import timezone
 from models import db, Device, History
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///assets.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///assets.db' #sql lite which has some limitations
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False     
 
 db.init_app(app)  # Initialize db with app here
 
@@ -22,14 +22,14 @@ def device_page(device_id):
 
     history = History.query.filter_by(device_id=device_id).order_by(History.timestamp.desc()).all()
 
-    # Prepare formatted history list with fixed timezone
+    # Preparing formatted history list with fixed timezone
     history_display = []
     for record in history:
 
 
         timestamp = record.timestamp
         if timestamp.tzinfo is None:
-    # Local naive timestamp is actually in Toronto time, so localize to Toronto
+    # Local naive timestamp is actually in Toronto time, so localize to Toronto :00000000
             timestamp = eastern.localize(timestamp)
 # Now timestamp is timezone-aware in Toronto time, so format directly
         formatted_time = timestamp.strftime("%Y-%m-%d %I:%M %p")
@@ -42,13 +42,34 @@ def device_page(device_id):
 
     return render_template("device.html", device=device, device_id=device_id, history=history_display)
 
+@app.route("/device/<device_id>/history.json")
+def device_history_json(device_id):
+    device = Device.query.get(device_id)
+    if not device:
+        abort(404)
+
+    history = History.query.filter_by(device_id=device_id).order_by(History.timestamp.desc()).all()
+
+    # Convert timestamps to readable strings
+    result = [
+        {
+            "timestamp": h.timestamp.strftime("%Y-%m-%d %H:%M:%S"),
+            "action": h.action,
+            "user": h.user
+        } for h in history
+    ]
+    return {"device": device.name, "device_id": device_id, "history": result}
+
+
+
+
 @app.route("/device/<device_id>/checkout", methods=["POST"])
 def checkout_device(device_id):
     device = Device.query.get(device_id)
     if not device:
         abort(404)
 
-    # Use timezone-aware Toronto time
+    # timezone-aware Toronto time
     now = datetime.now(eastern)
 
     device.status = "Checked Out (Available)"
@@ -69,7 +90,7 @@ def checkin_device(device_id):
     if not user:
         abort(400)
 
-    # Use timezone-aware Toronto time
+    # timezone-aware Toronto time
     now = datetime.now(eastern)
 
     device.status = "In Use"
@@ -86,7 +107,7 @@ def home():
     devices = Device.query.all()
     return render_template("index.html", devices={d.id: d for d in devices})
 
-# === Deployment ===
+# === Deploymentttt ===
 import os
 from waitress import serve
 
