@@ -34,7 +34,7 @@
     <ul>
         {% for record in history %}
             <li>
-                {{ record.timestamp.strftime("%Y-%m-%d %I:%M %p") }} -
+                {{ record.timestamp }} -
                 <strong>{{ record.action.title() }}</strong>
                 {% if record.user %}
                     by {{ record.user }}
@@ -44,6 +44,7 @@
             <li>No history available.</li>
         {% endfor %}
     </ul>
+
 
     <script>
     function promptUser(action) {

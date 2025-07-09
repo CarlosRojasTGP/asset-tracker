@@ -22,14 +22,21 @@ def device_page(device_id):
 
     history = History.query.filter_by(device_id=device_id).order_by(History.timestamp.desc()).all()
 
-    # Convert to Toronto time safely
+    # Prepare formatted history list with fixed timezone
+    history_display = []
     for record in history:
         timestamp = record.timestamp
         if timestamp.tzinfo is None:
             timestamp = pytz.utc.localize(timestamp)
-        record.timestamp = timestamp.astimezone(eastern)
+        local_time = timestamp.astimezone(eastern)
+        formatted_time = local_time.strftime("%Y-%m-%d %I:%M %p")
+        history_display.append({
+            "timestamp": formatted_time,
+            "action": record.action,
+            "user": record.user
+        })
 
-    return render_template("device.html", device=device, device_id=device_id, history=history)
+    return render_template("device.html", device=device, device_id=device_id, history=history_display)
 
 @app.route("/device/<device_id>/checkout", methods=["POST"])
 def checkout_device(device_id):
