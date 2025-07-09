@@ -10,10 +10,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)  # Initialize db with app here
 
 # Toronto timezone object (used consistently)
-eastern = timezone("America/Toronto")
+eastern = pytz.timezone("America/Toronto")
 
 # === Routes ===
-
 @app.route("/device/<device_id>")
 def device_page(device_id):
     device = Device.query.get(device_id)
@@ -21,8 +20,14 @@ def device_page(device_id):
         abort(404)
 
     history = History.query.filter_by(device_id=device_id).order_by(History.timestamp.desc()).all()
+
+    # Convert timestamps to Eastern time properly, handling naive or aware datetimes
     for record in history:
-        record.timestamp = record.timestamp.astimezone(eastern)
+        if record.timestamp.tzinfo is None:
+            # naive datetime assumed to be UTC
+            record.timestamp = record.timestamp.replace(tzinfo=pytz.utc).astimezone(eastern)
+        else:
+            record.timestamp = record.timestamp.astimezone(eastern)
 
     return render_template("device.html", device=device, device_id=device_id, history=history)
 
