@@ -220,7 +220,7 @@ with app.app_context():
             ),
             Device(
                 id="MAGGIE",
-                name="N/A Magnetic Locator",
+                name="Magnetic Locator",
                 serial="452156",
                 model="MAGGIE",
                 status="Checked Out (Available)",
