@@ -9,30 +9,30 @@ with app.app_context():
     if not Device.query.first():
         sample_devices = [
             Device(
-                id="TGP-LAPTOP-001",
-                name="Laptop #1",
-                serial="LAPTOP12345",
-                model="Test Model Jerry",
+                id="31538416",
+                name="P40-01 Outdoor LiDAR Scan & TS",
+                serial="1852705",
+                model="ScanStation P40",
                 status="Checked Out (Available)",
-                last_user="Carlos2.0",
+                last_user="No users in this session. See Microsoft List",
                 last_updated=datetime.strptime("2025-07-08 13:54:48", "%Y-%m-%d %H:%M:%S")
             ),
             Device(
-                id="TGP-PRINTER-002",
-                name="Office Printer",
-                serial="PRINTER12345",
-                model="Test model Not Jerry",
+                id="31036861",
+                name="AP-001 Auto Pole",
+                serial="574104",
+                model="AP20",
                 status="Checked Out (Available)",
-                last_user="Carlos Test",
+                last_user="No users in this session. See Microsoft List",
                 last_updated=datetime.strptime("2025-07-08 14:07:36", "%Y-%m-%d %H:%M:%S")
             ),
             Device(
-                id="TGP-MOUSE-003",
-                name="Carlos' Mouse",
-                serial="Mouse12345",
-                model="Logi working well",
+                id="31036808",
+                name="AP-002 Auto Pole",
+                serial="574051",
+                model="AP20",
                 status="Checked Out (Available)",
-                last_user="Alo",
+                last_user="No users in this session. See Microsoft List",
                 last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
             )
         ]
