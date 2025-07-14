@@ -10,6 +10,7 @@ class Device(db.Model):
     __tablename__ = 'devices'
     id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String)
+    owner = db.Column(db.String)
     serial = db.Column(db.String)
     model = db.Column(db.String)
     status = db.Column(db.String)
