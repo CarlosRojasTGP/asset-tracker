@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort, request
+from flask import Flask, render_template, abort, request, jsonify
 from datetime import datetime
 import pytz #for timezone
 from pytz import timezone
@@ -106,6 +106,26 @@ def checkin_device(device_id):
 def home():
     devices = Device.query.all()
     return render_template("index.html", devices={d.id: d for d in devices})
+
+
+
+@app.route("/history_all")
+def get_all_history():
+    history_records = History.query.order_by(History.timestamp.desc()).all()
+
+    result = []
+    for record in history_records:
+        device = Device.query.get(record.device_id)
+        result.append({
+            "device_id": record.device_id,
+            "device_name": device.name if device else "Unknown",  # ← ADD THIS
+            "user": record.user,
+            "action": record.action,
+            "timestamp": record.timestamp.isoformat()
+        })
+
+    return jsonify(result)
+
 
 # === Deploymentttt ===
 import os
