@@ -14,7 +14,7 @@ with app.app_context():
             Device(
                 id="31538416",
                 name="P40-01 Outdoor LiDAR Scan & TS",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="1852705",
                 model="ScanStation P40",
                 status="Checked Out (Available)",
@@ -24,7 +24,7 @@ with app.app_context():
             Device(
                 id="31036861",
                 name="AP-001 Auto Pole",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="574104",
                 model="AP20",
                 status="Checked Out (Available)",
@@ -34,7 +34,7 @@ with app.app_context():
             Device(
                 id="31036808",
                 name="AP-002 Auto Pole",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="574051",
                 model="AP20",
                 status="Checked Out (Available)",
@@ -44,7 +44,7 @@ with app.app_context():
             Device(
                 id="31100393",
                 name="AP-003 Auto Pole",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="574446",
                 model="AP20",
                 status="Checked Out (Available)",
@@ -54,7 +54,7 @@ with app.app_context():
             Device(
                 id="31305203",
                 name="GPS-001 GPS Rover",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="4906024",
                 model="GS18 T",
                 status="Checked Out (Available)",
@@ -64,7 +64,7 @@ with app.app_context():
             Device(
                 id="31313793",
                 name="GPS-001 CS20 Field Controller",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="2467956",
                 model="CS20 LTE",
                 status="Checked Out (Available)",
@@ -74,7 +74,7 @@ with app.app_context():
             Device(
                 id="31305206",
                 name="GPS-002 GPS Rover",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="4906027",
                 model="GS18 T",
                 status="Checked Out (Available)",
@@ -84,7 +84,7 @@ with app.app_context():
             Device(
                 id="31075304",
                 name="GPS-002 CS20 Field Controller",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="2467852",
                 model="CS20 LTE",
                 status="Checked Out (Available)",
@@ -94,7 +94,7 @@ with app.app_context():
             Device(
                 id="31321958ROVER",
                 name="GPS-003 GPS Rover",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="2467993",
                 model="GS18 T",
                 status="Checked Out (Available)",
@@ -104,7 +104,7 @@ with app.app_context():
             Device(
                 id="31321958FIELDCONTROLLER",
                 name="GPS-003 CS20 Field Controller",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="2467993",
                 model="CS20 LTE",
                 status="Checked Out (Available)",
@@ -114,7 +114,7 @@ with app.app_context():
             Device(
                 id="31307411",
                 name="GPS-004 GPS Rover",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="4906046",
                 model="GS18 T",
                 status="Checked Out (Available)",
@@ -124,7 +124,7 @@ with app.app_context():
             Device(
                 id="31478314",
                 name="GPS-004 CS20 Field Controller",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="4581248",
                 model="CS20 LTE",
                 status="Checked Out (Available)",
@@ -134,7 +134,7 @@ with app.app_context():
             Device(
                 id="31305216",
                 name="GPS-005 GPS Rover",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="4906037",
                 model="GS18 T",
                 status="Checked Out (Available)",
@@ -144,7 +144,7 @@ with app.app_context():
             Device(
                 id="31478318",
                 name="GPS-005 CS20 Field Controller",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="4581252",
                 model="CS20 LTE",
                 status="Checked Out (Available)",
@@ -154,7 +154,7 @@ with app.app_context():
             Device(
                 id="31237232",
                 name="TS16-001 Total Station",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="3018484",
                 model="TS16 I 1'' R500",
                 status="Checked Out (Available)",
@@ -164,7 +164,7 @@ with app.app_context():
             Device(
                 id="31075281",
                 name="TS16-001 CS20 Field Controller",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="2467829",
                 model="CS20 LTE",
                 status="Checked Out (Available)",
@@ -174,7 +174,7 @@ with app.app_context():
             Device(
                 id="31264416",
                 name="TS60-001 Total Station",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="897434",
                 model="TS60 I 0.5'' R1000",
                 status="Checked Out (Available)",
@@ -184,7 +184,7 @@ with app.app_context():
             Device(
                 id="31075305",
                 name="TS60-001 CS20 Field Controller",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="2467853",
                 model="CS20 LTE",
                 status="Checked Out (Available)",
@@ -194,7 +194,7 @@ with app.app_context():
             Device(
                 id="31522152",
                 name="TS60-002 Total Station",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="898960",
                 model="TS60 I 0.5'' R1000",
                 status="Checked Out (Available)",
@@ -204,7 +204,7 @@ with app.app_context():
             Device(
                 id="31478315",
                 name="TS60-002 CS20 Field Controller",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="4581249",
                 model="CS20 LTE",
                 status="Checked Out (Available)",
@@ -214,7 +214,7 @@ with app.app_context():
             Device(
                 id="31062662",
                 name="LEV-001 Digital Level",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="711184",
                 model="LS15 0.2mm AF",
                 status="Checked Out (Available)",
@@ -224,7 +224,7 @@ with app.app_context():
             Device(
                 id="31478131",
                 name="LEV-002 Digital Level",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="712255",
                 model="LS15 0.2mm AF",
                 status="Checked Out (Available)",
@@ -234,7 +234,7 @@ with app.app_context():
             Device(
                 id="Cthrue",
                 name="SCN-001 Concrete Scanner",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="010-24-000429",
                 model="Cthrue",
                 status="Checked Out (Available)",
@@ -244,7 +244,7 @@ with app.app_context():
             Device(
                 id="MAGGIE",
                 name="Magnetic Locator",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="452156",
                 model="MAGGIE",
                 status="Checked Out (Available)",
@@ -254,13 +254,104 @@ with app.app_context():
             Device(
                 id="31471889",
                 name="RTC360-01 Indoor LiDAR Scanner",
-                owner="Some Owner Name",
+                owner="TGP",
                 serial="2989411",
                 model="RT360 3D Laser Scanner",
                 status="Checked Out (Available)",
                 last_user="No users in this session. See Microsoft List",
                 last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
-            )
+            ),
+            Device(
+                id="37-12-001",
+                name="1/2 Hammer Drill/Driver",
+                owner="TGP Logistics",
+                serial="M64AM240534185",
+                model="2904-20",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="37-14-002",
+                name="1/4 Impact Driver",
+                owner="TGP Logistics",
+                serial="M67AM240537319",
+                model="2953-20",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="37-12-003",
+                name="1/2 Hammer Drill/Driver",
+                owner="TGP Logistics",
+                serial="M64AF233801571",
+                model="2904-20",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="37-14-004",
+                name="1/4 Impact Driver",
+                owner="TGP Logistics",
+                serial="M67AF233803678",
+                model="2953-20",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="37-10-005",
+                name="1'' Rotary Hammer",
+                owner="TGP Logistics",
+                serial="L85BD243501779",
+                model="2912-20",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="37-10-006",
+                name="1'' Rotary Hammer",
+                owner="TGP Logistics",
+                serial="L85BD240204015",
+                model="2912-20",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="DISTO-001",
+                name="Disto P2P Distance Meter",
+                owner="TGP Logistics",
+                serial="2441860895",
+                model="Disto X6",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="DISTO-002",
+                name="Disto P2P Distance Meter",
+                owner="TGP Logistics",
+                serial="2440651102",
+                model="Disto X6",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="DISTO-003",
+                name="Disto P2P Distance Meter",
+                owner="TGP Logistics",
+                serial="Equipment not in box (TBD)",
+                model="Disto X6",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+
         ]
         db.session.add_all(sample_devices)
         db.session.commit()
