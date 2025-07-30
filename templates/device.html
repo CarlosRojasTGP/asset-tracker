@@ -13,6 +13,7 @@
         <p><strong>Model:</strong> {{ device.model }}</p>
         <p><strong>Owner:</strong> {{ device.owner }}</p>
         <p><strong>Serial #:</strong> {{ device.serial }}</p>
+        <p><strong>Equipment #/TGP Asset #:</strong> {{ device.id }}</p>
         <p><strong>Status:</strong> {{ device.status }}</p>
 
         {% if device.status == "In Use" %}

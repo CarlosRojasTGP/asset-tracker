@@ -345,12 +345,22 @@ with app.app_context():
                 id="DISTO-003",
                 name="Disto P2P Distance Meter 3",
                 owner="TGP Logistics",
-                serial="Equipment not in box (TBD)",
+                serial="2441950442",
                 model="Disto X6",
                 status="Checked Out (Available)",
                 last_user="No users in this session. See Microsoft List",
                 last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
             ),
+            Device(
+                id="37-10-007",
+                name="10'' Dual Bevel Sliding Compound Miter Saw",
+                owner="TGP Logistics",
+                serial="H17A9250905710S",
+                model="2734-20",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            )
 
         ]
         db.session.add_all(sample_devices)
