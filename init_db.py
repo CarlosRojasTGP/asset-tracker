@@ -263,7 +263,7 @@ with app.app_context():
             ),
             Device(
                 id="37-12-001",
-                name="1/2 Hammer Drill/Driver",
+                name="0.5 Hammer Drill/Driver 1",
                 owner="TGP Logistics",
                 serial="M64AM240534185",
                 model="2904-20",
@@ -273,7 +273,7 @@ with app.app_context():
             ),
             Device(
                 id="37-14-002",
-                name="1/4 Impact Driver",
+                name="0.25 Impact Driver 1",
                 owner="TGP Logistics",
                 serial="M67AM240537319",
                 model="2953-20",
@@ -283,7 +283,7 @@ with app.app_context():
             ),
             Device(
                 id="37-12-003",
-                name="1/2 Hammer Drill/Driver",
+                name="0.5 Hammer Drill/Driver 2",
                 owner="TGP Logistics",
                 serial="M64AF233801571",
                 model="2904-20",
@@ -293,7 +293,7 @@ with app.app_context():
             ),
             Device(
                 id="37-14-004",
-                name="1/4 Impact Driver",
+                name="0.25 Impact Driver 2",
                 owner="TGP Logistics",
                 serial="M67AF233803678",
                 model="2953-20",
@@ -303,7 +303,7 @@ with app.app_context():
             ),
             Device(
                 id="37-10-005",
-                name="1'' Rotary Hammer",
+                name="1'' Rotary Hammer 1",
                 owner="TGP Logistics",
                 serial="L85BD243501779",
                 model="2912-20",
@@ -313,7 +313,7 @@ with app.app_context():
             ),
             Device(
                 id="37-10-006",
-                name="1'' Rotary Hammer",
+                name="1'' Rotary Hammer 2",
                 owner="TGP Logistics",
                 serial="L85BD240204015",
                 model="2912-20",
@@ -323,7 +323,7 @@ with app.app_context():
             ),
             Device(
                 id="DISTO-001",
-                name="Disto P2P Distance Meter",
+                name="Disto P2P Distance Meter 1",
                 owner="TGP Logistics",
                 serial="2441860895",
                 model="Disto X6",
@@ -333,7 +333,7 @@ with app.app_context():
             ),
             Device(
                 id="DISTO-002",
-                name="Disto P2P Distance Meter",
+                name="Disto P2P Distance Meter 2",
                 owner="TGP Logistics",
                 serial="2440651102",
                 model="Disto X6",
@@ -343,7 +343,7 @@ with app.app_context():
             ),
             Device(
                 id="DISTO-003",
-                name="Disto P2P Distance Meter",
+                name="Disto P2P Distance Meter 3",
                 owner="TGP Logistics",
                 serial="Equipment not in box (TBD)",
                 model="Disto X6",
