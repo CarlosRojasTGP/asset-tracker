@@ -263,7 +263,7 @@ with app.app_context():
             ),
             Device(
                 id="37-12-001",
-                name="0.5 Hammer Drill/Driver 1",
+                name="0.5 Hammer Drill-Driver 1",
                 owner="TGP Logistics",
                 serial="M64AM240534185",
                 model="2904-20",
@@ -283,7 +283,7 @@ with app.app_context():
             ),
             Device(
                 id="37-12-003",
-                name="0.5 Hammer Drill/Driver 2",
+                name="0.5 Hammer Drill-Driver 2",
                 owner="TGP Logistics",
                 serial="M64AF233801571",
                 model="2904-20",
