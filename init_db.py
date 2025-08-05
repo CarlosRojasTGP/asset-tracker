@@ -7,7 +7,7 @@ from datetime import datetime
 
 with app.app_context():
     db.create_all()
-    print("Database tables created successfully.")
+    print("Database tables created successfully.") #to know when it was created
 
     if not Device.query.first():
         sample_devices = [
