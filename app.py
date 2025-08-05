@@ -70,7 +70,7 @@ def checkout_device(device_id):
     if not device:
         abort(404) #abort if not valid device id
 
-    user = request.json.get("user") #finding out who to assign the checkin ?????
+    user = device.last_user #finding out who to assign the checkin ?????
     if not user:
         abort(400) #abort if not valid device id ?????
 
