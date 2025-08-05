@@ -16,7 +16,7 @@
         <p><strong>Equipment #/TGP Asset #:</strong> {{ device.id }}</p>
         <p><strong>Status:</strong> {{ device.status }}</p>
 
-        {% if device.status == "In Use" %}
+        {% if device.last_user %}
             <p><strong>Last User:</strong> {{ device.last_user }}</p>
         {% endif %}
 
