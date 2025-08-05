@@ -360,6 +360,166 @@ with app.app_context():
                 status="Checked Out (Available)",
                 last_user="No users in this session. See Microsoft List",
                 last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="25-25-001R",
+                name="25 KVA Diesel Generator with Ground Plate",
+                owner="TGP Logistics",
+                serial="9950699",
+                model="-",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="18-10-001R",
+                name="1000L Fuel Cube with Fuel Transfer Pump ( Electric )",
+                owner="TGP Logistics",
+                serial="24008011",
+                model="10TCG-GLB",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="34-10-001R",
+                name="10' Sea Container 1",
+                owner="TGP Logistics",
+                serial="-",
+                model="-",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="34-10-002R",
+                name="10' Sea Container 2",
+                owner="TGP Logistics",
+                serial="-",
+                model="-",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="25-25-002R",
+                name="25 KVA Diesel Generator (480V) with Ground Plate 1",
+                owner="TGP Logistics",
+                serial="48-000187",
+                model="-",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="18-10-002R",
+                name="1000L Fuel Cube 115V with 20' Fuel Feed Return Hose 1",
+                owner="TGP Logistics",
+                serial="24009019",
+                model="10TCG-GLB",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="34-10-003R",
+                name="10' Sea Container 3",
+                owner="TGP Logistics",
+                serial="-",
+                model="-",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="34-10-004R",
+                name="10' Sea Container 4",
+                owner="TGP Logistics",
+                serial="-",
+                model="-",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="25-25-003R",
+                name="25 KVA Diesel Generator (480V) with Ground Plate 2",
+                owner="TGP Logistics",
+                serial="7161810",
+                model="DCA-25SSIU4F",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="18-10-003R",
+                name="1000L Fuel Cube 115V with 20' Fuel Feed Return Hose 2",
+                owner="TGP Logistics",
+                serial="21010859",
+                model="10TCG-GLB",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="34-20-001R",
+                name="20' Sea Container",
+                owner="TGP Logistics",
+                serial="-",
+                model="-",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="24-20-001R",
+                name="20' Boxx Modular Office Trailer on Wheels",
+                owner="TGP Logistics",
+                serial="0SW102018N101051",
+                model="10 x 20 Mobile Office",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="24-32-001R",
+                name="32' Boxx Modular Office Trailer on Wheels",
+                owner="TGP Logistics",
+                serial="MU10320717NRB00809",
+                model="10 x 32 Mobile Office",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="24-10-001R",
+                name="Portable Restroom 1",
+                owner="TGP Logistics",
+                serial="2T9GWCFL9R1208664",
+                model="1003",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="24-10-002R",
+                name="Portable Restroom 2",
+                owner="TGP Logistics",
+                serial="1003-1032",
+                model="1003",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="37-10-008",
+                name="5'' Grinder",
+                owner="TGP Logistics",
+                serial="L64BF241001404",
+                model="2880-20",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
             )
 
         ]
