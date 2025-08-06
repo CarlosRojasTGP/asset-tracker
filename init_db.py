@@ -495,7 +495,7 @@ with app.app_context():
                 id="24-10-001R",
                 name="Portable Restroom 1",
                 owner="TGP Logistics",
-                serial="2T9GWCFL9R1208664",
+                serial="1003-1409",
                 model="1003",
                 status="Checked Out (Available)",
                 last_user="No users in this session. See Microsoft List",
@@ -517,6 +517,16 @@ with app.app_context():
                 owner="TGP Logistics",
                 serial="L64BF241001404",
                 model="2880-20",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="34-20-002R",
+                name="20' Sea Container 2",
+                owner="TGP Logistics",
+                serial="1016092",
+                model="20' Sea Container",
                 status="Checked Out (Available)",
                 last_user="No users in this session. See Microsoft List",
                 last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
