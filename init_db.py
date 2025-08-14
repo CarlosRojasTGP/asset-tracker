@@ -530,6 +530,36 @@ with app.app_context():
                 status="Checked Out (Available)",
                 last_user="No users in this session. See Microsoft List",
                 last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="34-20-003R",
+                name="20' Sea Container 3",
+                owner="TGP Logistics",
+                serial="IPXU 3707255",
+                model="20' Sea Container",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="24-20-002R",
+                name="20' Boxx Modular Office Trailer on Wheels 2",
+                owner="TGP Logistics",
+                serial="OSW102020MF01709",
+                model="10 x 20 Mobile Office",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="37-12-002",
+                name="0.5 Hammer Drill-Driver 3",
+                owner="TGP Logistics",
+                serial="M64AF241416936",
+                model="2904-20",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
             )
 
         ]
