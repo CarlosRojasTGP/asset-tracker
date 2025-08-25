@@ -560,6 +560,16 @@ with app.app_context():
                 status="Checked Out (Available)",
                 last_user="No users in this session. See Microsoft List",
                 last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="34-20-004R",
+                name="20' Sea Container 4",
+                owner="TGP Logistics",
+                serial="KKTU7545598",
+                model="20' Sea Container",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
             )
 
         ]
