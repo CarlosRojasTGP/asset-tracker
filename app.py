@@ -132,7 +132,6 @@ def get_all_history():
 
     return jsonify(result) #power automate reads json code so need to turn into that format to read as dynamic content
 
-
 # === Deploymentttt ===
 import os
 from waitress import serve

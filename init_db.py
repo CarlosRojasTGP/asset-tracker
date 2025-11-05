@@ -570,6 +570,46 @@ with app.app_context():
                 status="Checked Out (Available)",
                 last_user="No users in this session. See Microsoft List",
                 last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="24-32-002R",
+                name="32' Boxx Modular Office Trailer on Wheels 2",
+                owner="TGP Logistics",
+                serial="OSW103221MF01876",
+                model="10 x 32 Mobile Office",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="25-25-004R",
+                name="25 KVA Generator with Ground Plate 1",
+                owner="TGP Logistics",
+                serial="WNMG0201VM0000809",
+                model="G25",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="18-10-004R",
+                name="1000L Fuel Cube 1",
+                owner="TGP Logistics",
+                serial="G43469831",
+                model="10TCG-GLB",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
+            ),
+            Device(
+                id="24-10-004R",
+                name="Double Restroom Trailer",
+                owner="TGP Logistics",
+                serial="1003-689",
+                model="1003",
+                status="Checked Out (Available)",
+                last_user="No users in this session. See Microsoft List",
+                last_updated=datetime.strptime("2025-07-08 13:56:12", "%Y-%m-%d %H:%M:%S")
             )
 
         ]
