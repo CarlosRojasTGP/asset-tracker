@@ -1,0 +1,85 @@
+﻿id,name,owner,serial,model
+CCAN-001R,10' Sea Container 5,TGP Logistics, -, -
+CCAN-002R,10' Sea Container 6,TGP Logistics, -, -
+CCAN-006R,10' Sea Container 7,TGP Logistics, -, -
+CUBE-001R,1000L Fuel Cube 115V with 20' Fuel Feed Return Hose 3,TGP Logistics,24009019,10TCG-GLB
+CUBE-002R,1000L Fuel Cube 115V with 20' Fuel Feed Return Hose 4,TGP Logistics,19003593,10TCG-GLB
+CUBE-003R,1000L Fuel Cube with Fuel Transfer Pump ( Electric ) 2,TGP Logistics,24008011,10TCG-GLB
+WASH-007R,10X24 Washroom Male/Female 1,TGP Logistics,LV10240416MF00254, -
+BOXX-006R,10X32 Office Trailer 1,TGP Logistics,MU103217NRB00821,10X32
+BOXX-007R,10X32 Office Trailer 2,TGP Logistics,OSW103219NI01280,10X32
+GEN-007R,125 KVA Diesel Generator 1,TGP Logistics,B220040803,C100D2RE
+BOXX-009R,12X60 Boxx Modular Office Trailer on Wheels 1,TGP Logistics,OSW126019N101110,12X60
+BOXX-001R,20' Boxx Modular Office Trailer on Wheels 3,TGP Logistics,0SW102018N101051,10 x 20 Mobile Office
+BOXX-003R,20' Boxx Modular Office Trailer on Wheels 4,TGP Logistics,OSW102020MF01709,10 x 20 Mobile Office
+CCAN-003R,20' Sea Container 5,TGP Logistics,Cooper252,20' Sea Container
+CCAN-004R,20' Sea Container 6,TGP Logistics,1016092,20' Sea Container
+CCAN-005R,20' Sea Container 7,TGP Logistics,KKTU7545598,20' Sea Container
+CCAN-007R,20' Sea Container 8,TGP Logistics,IPXU 3707255,20' Sea Container
+CUBE-004R,2000L Fuel Cube 1,TGP Logistics,G43469831,10TCG-GLB
+CUBE-005R,2000L Fuel Cube 2,TGP Logistics,25000870,20TCG-GLB
+GEN-001R,25 KVA Diesel Generator (480V) with Ground Plate 3,TGP Logistics,48-000187, -
+GEN-002R,25 KVA Diesel Generator (480V) with Ground Plate 4,TGP Logistics,7161810,DCA-25SSIU4F
+GEN-008R,25 KVA Diesel Generator (480V) with Ground Plate 5,TGP Logistics,24548605,G25
+GEN-003R,25 KVA Diesel Generator with Ground Plate 2,TGP Logistics,WNMG0201CM0003359 , -
+GEN-005R,25 KVA Diesel Generator with Ground Plate 3,TGP Logistics,24501964,G25
+GEN-004R,25 KVA Generator with Ground Plate 2,TGP Logistics,WNMG0201VM0000809,G25
+GEN-009R,25KW Generator with Fuel Cube 1,TGP Logistics,3013508245,MDG25IF4
+LIFT-001R,26 Ft RT Scissor Lift 1,TGP Logistics,37012138, -
+BOXX-002R,32' Boxx Modular Office Trailer on Wheels 3,TGP Logistics,MU10320717NRB00809,10 x 32 Mobile Office
+BOXX-004R,32' Boxx Modular Office Trailer on Wheels 4,TGP Logistics,OSW103221MF01876,10 x 32 Mobile Office
+BOXX-005R,32' Boxx Modular Office Trailer on Wheels 5,TGP Logistics,OSW103220MF01721,10 x 32 Mobile Office
+BOXX-008R,32' Boxx Modular Office Trailer on Wheels 6,TGP Logistics,OSW103221MF01935,10X32
+PANEL-001R,400 Amp Disconnect,TGP Logistics,G1630575,DB400LP-AW-S3
+GEN-010R,45 KW Generator ,TGP Logistics,3014755799,MMG45IF4
+GARD-001,4X6 Guardhouse 1,TGP Logistics,-,4X6 Guardhouse
+GARD-002,4X6 Guardhouse 2,TGP Logistics,-,4X6 Guardhouse
+GARD-003,4X6 Guardhouse 3,TGP Logistics,-,4X6 Guardhouse
+GARD-004,4X6 Guardhouse 4,TGP Logistics,-,4X6 Guardhouse
+GEN-006R,50 KVA Generator with Ground Plate 1,TGP Logistics,WNMG0203JM0000517,-
+LT-001R,6 KW Diesel Light Tower 1,TGP Logistics,37-001840,6KW Diesel Light Tower
+LT-010R,6 KW Diesel Light Tower 10,TGP Logistics,37-002869,6KW Diesel Light Tower
+LT-011R,6 KW Diesel Light Tower 11,TGP Logistics,47-000270,6KW Diesel Light Tower
+LT-012R,6 KW Diesel Light Tower 12,TGP Logistics,37-002304,-
+LT-013R,6 KW Diesel Light Tower 13,TGP Logistics,47-003784,-
+LT-014R,6 KW Diesel Light Tower 14,TGP Logistics,37-002304,-
+LT-015R,6 KW Diesel Light Tower 15,TGP Logistics,47-001852,-
+LT-016R,6 KW Diesel Light Tower 16,TGP Logistics,47-003713,-
+LT-002R,6 KW Diesel Light Tower 2,TGP Logistics,WNCLTV04HPUM00649,6KW Diesel Light Tower
+LT-003R,6 KW Diesel Light Tower 3,TGP Logistics,3010678466,6KW Diesel Light Tower
+LT-004R,6 KW Diesel Light Tower 4,TGP Logistics,37-001742,6KW Diesel Light Tower
+LT-005R,6 KW Diesel Light Tower 5,TGP Logistics,37-003563,6KW Diesel Light Tower
+LT-006R,6 KW Diesel Light Tower 6,TGP Logistics,39-001909,6KW Diesel Light Tower
+LT-007R,6 KW Diesel Light Tower 7,TGP Logistics,37-000753,6KW Diesel Light Tower
+LT-008R,6 KW Diesel Light Tower 8,TGP Logistics,WUX914984,6KW Diesel Light Tower
+LT-009R,6 KW Diesel Light Tower 9,TGP Logistics,3013359656,6KW Diesel Light Tower
+GARD-001R,8X10 Ft Guardhouse for OV1 /NFS 1,TGP Logistics,CWWU0235633,10' SC
+GARD-002R,8X10 Ft Guardhouse for OV1 /NFS 2,TGP Logistics,-,10AO
+SKID-003R,Backhoe Loader Rental 1,TGP Logistics,JJGN58SNPNC780434,580SN
+SKID-003RA,Backhoe Plow Blade Attachment 1,TGP Logistics,X52887,SP08B
+WASH-001R,Double Restroom Trailer 2,TGP Logistics,1003-1409,1003
+WASH-002R,Double Restroom Trailer 3,TGP Logistics,1003-1032,1003
+WASH-003R,Double Restroom Trailer 4,TGP Logistics,1003-045,1003
+WASH-004R,Double Restroom Trailer 5,TGP Logistics,1003-689,1003
+WASH-005R,Double Restroom Trailer 6,TGP Logistics,-,-
+WASH-006R,Double Restroom Trailer 7,TGP Logistics,1003-129,1003
+WASH-008R,Double Restroom Trailer 8,TGP Logistics,-,-
+CUBE-006R,Fuel  Cube 2000L with Fuel Transfer Pump 1,TGP Logistics,OKPA201492,-
+CUBE-010R,Fuel Cube 1000L 1,TGP Logistics,-,-
+CUBE-008R,Fuel Cube 2000L 2,TGP Logistics,16001899,20TCG-GLB
+CUBE-009R,Fuel Cube 250-300 Galloon Diesel 1,TGP Logistics,22011980,10TCG-UR-CA-12V
+CUBE-007R,Fuel Cube 500 Gal  tied to 125KVA Generator 1,TGP Logistics,F96546016,20TCG-UR-CA-12V
+HYB-001R,Hybrid Comfort Station 1,TGP Logistics,-,-
+HYB-002R,Hybrid Comfort Station 2,TGP Logistics,-,-
+HYB-003R,Hybrid Comfort Station 3,TGP Logistics,-,-
+HYB-004R,Hybrid Comfort Station 4,TGP Logistics,-,-
+HYB-005R,Hybrid Comfort Station 5,TGP Logistics,-,-
+HYB-006R,Hybrid Comfort Station 6,TGP Logistics,-,-
+HYB-007R,Hybrid Comfort Station 7,TGP Logistics,-,-
+SALT-001,Salt Spreader 1,TGP Logistics,-,-
+SALT-002,Salt Spreader 2,TGP Logistics,-,-
+SKID-004RA,Salt Spreader attachment for Skidsteer 2,TGP Logistics,AC1N03897,Salt Spreader
+SKID-001R,Tracked Skidsteer with forks and bucket 1,TGP Logistics,408012075,TL8R2-CR
+SKID-002R,Tracked Skidsteer with forks and bucket 2,TGP Logistics,410005148,-
+SKID-004R,Tracked Skidsteer with forks and bucket 3,TGP Logistics,B5FF11036,T650
+WASH-007RA,Waste Containment and Fresh Water 1,TGP Logistics,CN08200917DS00065,-

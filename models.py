@@ -6,7 +6,9 @@ db = SQLAlchemy()
 def current_time():
     return datetime.now(timezone.utc).replace(microsecond=0)
 
-class Device(db.Model):
+#these are different tables in the database. Devices and history, each with their respective columns
+#visualize in an online db reader or downloading something that reads sqlite databases (.db)
+class Device(db.Model): 
     __tablename__ = 'devices'
     id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String)

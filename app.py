@@ -72,17 +72,17 @@ def checkout_device(device_id):
 
     user = device.last_user #finding out who to assign the checkin ?????
     if not user:
-        abort(400) #abort if not valid device id ?????
+        abort(400) 
 
     # timezone-aware Toronto time
     now = datetime.now(eastern)
 
     device.status = "Checked Out (Available)" #assigning the new status
     device.last_updated = now #updating the time last updated
-    device.last_user = user #last user ?????
+    device.last_user = user #last user
 
     db.session.add(device)
-    db.session.add(History(device_id=device_id, action="checkout", user=user, timestamp=now)) #user=user ??????
+    db.session.add(History(device_id=device_id, action="checkout", user=user, timestamp=now)) 
     db.session.commit() 
     return "", 204
 
@@ -115,7 +115,7 @@ def home():
 
 
 
-@app.route("/history_all") #essential for the power automate flow (records all the history available so power automate updates every 10 min)
+@app.route("/history_all") #the one used with power automate flow (records all the history available so power automate updates every 10 min)
 def get_all_history():
     history_records = History.query.order_by(History.timestamp.desc()).all() #get all history
 
