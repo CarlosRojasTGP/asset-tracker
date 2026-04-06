@@ -79,10 +79,10 @@ def checkout_device(device_id):
 
     user = device.last_user #finding out who to assign the checkin ??????
     if not user:
-
         abort(400)
 
-    if user == "No users in this session. See Microsoft List":
+    status = device.status
+    if status == "Checked Out (Available)": #new filter: cannot checkout if you haven't checked in first
         abort(400)
 
     # timezone-aware Toronto time
@@ -106,6 +106,11 @@ def checkin_device(device_id):
     user = request.json.get("user") #finding out who to assign the checkin
     if not user:
         abort(400) #abort if not valid device id
+    
+    status = device.status
+    if status == "In Use": #new filter to prevent consecutive checkins without having checked out first
+        abort(400)
+
 
     # timezone-aware Toronto time
     now = datetime.now(eastern)
