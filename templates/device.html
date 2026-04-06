@@ -63,7 +63,13 @@
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({})
-        }).then(() => location.reload());
+        }).then(response => {
+            if (response.ok){
+                location.reload()
+            } else {
+                alert("You need to be checked in to a device to check out.")
+            }
+        });
     }
 
     function checkIn() {
@@ -73,7 +79,13 @@
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ user: user })
-        }).then(() => location.reload());
+        }).then(response => {
+            if (response.ok) {
+                location.reload()
+            } else {
+                alert("Please check out before checking in again")
+            }
+        });
     }
     </script>
 </body>
