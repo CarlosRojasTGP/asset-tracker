@@ -1406,7 +1406,7 @@ with app.app_context():
             Device(
                 id="CUBE-007R",
                 name="Fuel Cube 500 Gal  tied to 125KVA Generator 1",
-                owner="TGP Logistics",
+                owner="TGP Logistics", #owner will always be tgp
                 serial="F96546016",
                 model="20TCG-UR-CA-12V",
                 status="Checked Out (Available)",

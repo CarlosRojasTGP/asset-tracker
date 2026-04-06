@@ -4,6 +4,13 @@ import pytz #for timezone
 from pytz import timezone
 from models import db, Device, History
 
+
+
+#Possible improvements would be to include the area or more relevant information into the website.
+
+
+
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///assets.db' #sql lite which has some limitations (handled by history_all + power automate flow)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False     
@@ -70,9 +77,13 @@ def checkout_device(device_id):
     if not device:
         abort(404) #abort if not valid device id
 
-    user = device.last_user #finding out who to assign the checkin ?????
+    user = device.last_user #finding out who to assign the checkin ??????
     if not user:
-        abort(400) 
+
+        abort(400)
+
+    if user == "No users in this session. See Microsoft List":
+        abort(400)
 
     # timezone-aware Toronto time
     now = datetime.now(eastern)
