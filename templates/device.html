@@ -30,10 +30,10 @@
     </div>
 
     <h3>Device QR Code</h3>
-    <img src="{{ url_for('static', filename='qrcodes/' + device.name + '.png') }}" alt="QR Code">
+    <img src="{{ url_for('static', filename='qrcodes/' + device.name + '.png') }}" alt="QR Code Not Available">
 
     <h3>Certificate</h3>
-    <img src="{{ url_for('static', filename='certificates/' + 'cert-' + device.name + '.png') }}" alt="Certificate">
+    <img src="{{ url_for('static', filename='certificates/' + 'cert-' + device.name + '.png') }}" alt="Certificate Not Available">
 
     <h3>Check-in / Check-out History</h3>
     <ul>
@@ -52,6 +52,15 @@
 
 
     <script>
+    function promptInfo(action) {
+        let info = prompt("Please enter this information");
+        if (!date) {
+            alert("information---- is required to submit");
+            return null;
+        }
+        return info;
+    }
+
     function promptUser(action) {
         let user = prompt("Please enter your name:");
         if (!user) {

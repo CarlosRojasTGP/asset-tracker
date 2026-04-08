@@ -2,13 +2,9 @@ from flask import Flask, render_template, abort, request, jsonify
 from datetime import datetime
 import pytz #for timezone
 from pytz import timezone
-from models import db, Device, History
-
-
+from models import db, Device, History, Inspection
 
 #Possible improvements would be to include the area or more relevant information into the website.
-
-
 
 
 app = Flask(__name__)
@@ -48,8 +44,9 @@ def device_page(device_id):
 
     return render_template("device.html", device=device, device_id=device_id, history=history_display)
 
-
+################################################################################################
 #Individual history of checkin and checkout for a device) - Currently not used but maybe useful in the future. 
+
 @app.route("/device/<device_id>/history.json")
 def device_history_json(device_id):
     device = Device.query.get(device_id)
@@ -68,7 +65,7 @@ def device_history_json(device_id):
     ]
     return {"device": device.name, "device_id": device_id, "history": result}
 
-
+################################################################################################
 
 #Checkout route for the button (action)
 @app.route("/device/<device_id>/checkout", methods=["POST"])
@@ -124,12 +121,81 @@ def checkin_device(device_id):
     db.session.commit() #commit to the database (save)
     return "", 204
 
+################################################################################################
+
+@app.route("/device/<device_id>/inspection", methods=["GET"])
+def inspection_page(device_id):
+    device = Device.query.get(device_id)
+    if not device:
+        abort(404)
+    return render_template("inspection.html", device=device, device_id=device_id)
+
+
+@app.route("/device/<device_id>/inspection", methods=["POST"])
+def submit_inspection(device_id):
+    device = Device.query.get(device_id)
+    if not device:
+        abort(404)
+
+    data = request.json
+
+    # Validate required fields
+    required = ["inspector", "overall_condition", "screen_condition",
+                "battery_condition", "accessories_present"]
+    for field in required:
+        if not data.get(field):
+            abort(400)
+
+    now = datetime.now(eastern)
+
+    inspection = Inspection(
+        device_id=device_id,
+        inspector=data.get("inspector"),
+        timestamp=now,
+        overall_condition=data.get("overall_condition"),
+        screen_condition=data.get("screen_condition"),
+        battery_condition=data.get("battery_condition"),
+        accessories_present=data.get("accessories_present"),
+        functional_issues=data.get("functional_issues", ""),
+        notes=data.get("notes", "")
+    )
+
+    db.session.add(inspection)
+    db.session.commit()
+    return "", 204
+
+#Endpoint for power automate - for inspections list
+
+@app.route("/inspections_all")
+def get_all_inspections():
+    records = Inspection.query.order_by(Inspection.timestamp.desc()).all()
+
+    result = []
+    for record in records:
+        device = Device.query.get(record.device_id)
+        result.append({
+            "id": record.id,
+            "device_id": record.device_id,
+            "device_name": device.name if device else "Unknown",
+            "inspector": record.inspector,
+            "timestamp": record.timestamp.isoformat(),
+            "overall_condition": record.overall_condition,
+            "screen_condition": record.screen_condition,
+            "battery_condition": record.battery_condition,
+            "accessories_present": record.accessories_present,
+            "functional_issues": record.functional_issues,
+            "notes": record.notes
+        })
+
+    return jsonify(result)
+
+################################################################################################
 @app.route("/")
 def home():
     devices = Device.query.all()
     return render_template("index.html", devices={d.id: d for d in devices}) #general page showing all the devices available (not meant for general use)
 
-
+################################################################################################
 
 @app.route("/history_all") #the one used with power automate flow (records all the history available so power automate updates every 10 min)
 def get_all_history():
@@ -147,6 +213,9 @@ def get_all_history():
         })
 
     return jsonify(result) #power automate reads json code so need to turn into that format to read as dynamic content
+
+################################################################################################
+
 
 # === Deploymentttt ===
 import os
