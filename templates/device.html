@@ -32,6 +32,9 @@
     <h3>Device QR Code</h3>
     <img src="{{ url_for('static', filename='qrcodes/' + device.name + '.png') }}" alt="QR Code">
 
+    <h3>Certificate</h3>
+    <img src="{{ url_for('static', filename='certificates/' + 'cert-' + device.name + '.png') }}" alt="Certificate">
+
     <h3>Check-in / Check-out History</h3>
     <ul>
         {% for record in history %}
