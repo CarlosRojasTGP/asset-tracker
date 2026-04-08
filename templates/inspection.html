@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inspection – {{ device.name }}</title>
+    <style>
+        body { font-family: Arial; padding: 20px; max-width: 500px; }
+        .info { border: 2px solid #1d889b; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+        .field { margin-bottom: 16px; }
+        label { display: block; font-weight: bold; margin-bottom: 4px; }
+        select, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box; }
+        textarea { resize: vertical; min-height: 80px; }
+        input[type="text"] { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box; }
+        button[type="button"] { background: #1d889b; color: white; border: none; padding: 10px 24px; border-radius: 6px; font-size: 15px; cursor: pointer; }
+        button[type="button"]:hover { background: #166e7e; }
+        .back { margin-bottom: 16px; display: inline-block; color: #1d889b; text-decoration: none; }
+        .required { color: #c0392b; }
+    </style>
+</head>
+<body>
+    <a class="back" href="{{ url_for('device_page', device_id=device_id) }}">← Back to {{ device.name }}</a>
+
+    <h1>Inspection</h1>
+
+    <div class="info">
+        <p><strong>Device:</strong> {{ device.name }}</p>
+        <p><strong>Model:</strong> {{ device.model }}</p>
+        <p><strong>Serial #:</strong> {{ device.serial }}</p>
+        <p><strong>Equipment #:</strong> {{ device.id }}</p>
+    </div>
+
+    <div class="field">
+        <label>Inspector Name <span class="required">*</span></label>
+        <input type="text" id="inspector" placeholder="Your full name" />
+    </div>
+
+    <div class="field">
+        <label>Overall Condition <span class="required">*</span></label>
+        <select id="overall_condition">
+            <option value="">— Select —</option>
+            <option>Good</option>
+            <option>Fair</option>
+            <option>Poor</option>
+        </select>
+    </div>
+
+    <div class="field">
+        <label>Screen Condition <span class="required">*</span></label>
+        <select id="screen_condition">
+            <option value="">— Select —</option>
+            <option>Good</option>
+            <option>Damaged</option>
+            <option>N/A</option>
+        </select>
+    </div>
+
+    <div class="field">
+        <label>Battery Condition <span class="required">*</span></label>
+        <select id="battery_condition">
+            <option value="">— Select —</option>
+            <option>Good</option>
+            <option>Fair</option>
+            <option>Poor</option>
+            <option>N/A</option>
+        </select>
+    </div>
+
+    <div class="field">
+        <label>Accessories Present <span class="required">*</span></label>
+        <select id="accessories_present">
+            <option value="">— Select —</option>
+            <option>Yes</option>
+            <option>No</option>
+            <option>Partial</option>
+        </select>
+    </div>
+
+    <div class="field">
+        <label>Functional Issues</label>
+        <textarea id="functional_issues" placeholder="Describe any functional problems (optional)"></textarea>
+    </div>
+
+    <div class="field">
+        <label>Additional Notes</label>
+        <textarea id="notes" placeholder="Any other observations (optional)"></textarea>
+    </div>
+
+    <button type="button" onclick="submitInspection()">Submit Inspection</button>
+
+    <script>
+    function submitInspection() {
+        const inspector = document.getElementById("inspector").value.trim();
+        const overall_condition = document.getElementById("overall_condition").value;
+        const screen_condition = document.getElementById("screen_condition").value;
+        const battery_condition = document.getElementById("battery_condition").value;
+        const accessories_present = document.getElementById("accessories_present").value;
+
+        if (!inspector || !overall_condition || !screen_condition || !battery_condition || !accessories_present) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
+        fetch(window.location.pathname, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                inspector,
+                overall_condition,
+                screen_condition,
+                battery_condition,
+                accessories_present,
+                functional_issues: document.getElementById("functional_issues").value.trim(),
+                notes: document.getElementById("notes").value.trim()
+            })
+        }).then(response => {
+            if (response.ok) {
+                alert("Inspection submitted successfully.");
+                window.location.href = "{{ url_for('device_page', device_id=device_id) }}";
+            } else {
+                alert("Something went wrong. Please try again.");
+            }
+        });
+    }
+    </script>
+</body>
+</html>

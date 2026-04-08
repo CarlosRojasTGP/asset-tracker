@@ -35,6 +35,11 @@
     <h3>Certificate</h3>
     <img src="{{ url_for('static', filename='certificates/' + 'cert-' + device.name + '.png') }}" alt="Certificate Not Available">
 
+    <h3>Inspections</h3>
+    <a href="{{ url_for('inspection_page', device_id=device_id) }}">
+    <button>Start an inspection</button>
+    </a>
+    
     <h3>Check-in / Check-out History</h3>
     <ul>
         {% for record in history %}
@@ -52,15 +57,6 @@
 
 
     <script>
-    function promptInfo(action) {
-        let info = prompt("Please enter this information");
-        if (!date) {
-            alert("information---- is required to submit");
-            return null;
-        }
-        return info;
-    }
-
     function promptUser(action) {
         let user = prompt("Please enter your name:");
         if (!user) {

@@ -26,3 +26,23 @@ class History(db.Model):
     action = db.Column(db.String)
     user = db.Column(db.String)
     timestamp = db.Column(db.DateTime, default=current_time)
+'''
+class Inspection(db.Model):
+    __tablename__ = 'inspection'
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime, default=current_time)
+    '''
+
+class Inspection(db.Model):
+    __tablename__ = 'inspections'
+    id = db.Column(db.Integer, primary_key=True)
+    device_id = db.Column(db.String, db.ForeignKey('devices.id'))
+    inspector = db.Column(db.String)           # name of person doing inspection
+    timestamp = db.Column(db.DateTime, default=current_time)
+    overall_condition = db.Column(db.String)   # Good / Fair / Poor
+    screen_condition = db.Column(db.String)    # Good / Damaged / N/A
+    battery_condition = db.Column(db.String)   # Good / Fair / Poor / N/A
+    accessories_present = db.Column(db.String) # Yes / No / Partial
+    functional_issues = db.Column(db.String)   # free text
+    notes = db.Column(db.String)               # free text
+    
