@@ -93,6 +93,8 @@
         const screen_condition = document.getElementById("screen_condition").value;
         const battery_condition = document.getElementById("battery_condition").value;
         const accessories_present = document.getElementById("accessories_present").value;
+        const functional_issues = document.getElementById("functional_issues").value; //trim() 
+        const notes = document.getElementById("notes").value; //trim()
 
         if (!inspector || !overall_condition || !screen_condition || !battery_condition || !accessories_present) {
             alert("Please fill in all required fields.");
@@ -108,8 +110,8 @@
                 screen_condition,
                 battery_condition,
                 accessories_present,
-                functional_issues: document.getElementById("functional_issues").value.trim(),
-                notes: document.getElementById("notes").value.trim()
+                functional_issues,
+                notes
             })
         }).then(response => {
             if (response.ok) {
