@@ -1,6 +1,6 @@
 from flask import Flask, render_template, abort, request, jsonify
 from datetime import datetime
-import pytz #for timezone
+import pytz
 from pytz import timezone
 from models import db, Device, History, Inspection
 
@@ -122,8 +122,9 @@ def checkin_device(device_id):
     return "", 204
 
 ################################################################################################
+#Inspections
 
-@app.route("/device/<device_id>/inspection", methods=["GET"])
+@app.route("/device/<device_id>/inspection", methods=["GET"]) #this endpoint serves to simply load the inspection form
 def inspection_page(device_id):
     device = Device.query.get(device_id)
     if not device:
@@ -131,21 +132,14 @@ def inspection_page(device_id):
     return render_template("inspection.html", device=device, device_id=device_id)
 
 
+
 @app.route("/device/<device_id>/inspection", methods=["POST"])
 def submit_inspection(device_id):
-    device = Device.query.get(device_id)
+    device = Device.query.get(device_id) #Checking that the device_id is real and it matches some asset in the database
     if not device:
         abort(404)
 
-    data = request.json
-
-    # Validate required fields
-    required = ["inspector", "overall_condition", "screen_condition",
-                "battery_condition", "accessories_present"]
-    for field in required:
-        if not data.get(field):
-            abort(400)
-
+    data = request.json #the actual information for the inspection comes from the request (from the javascript function submitted)
     now = datetime.now(eastern)
 
     inspection = Inspection(
@@ -160,25 +154,25 @@ def submit_inspection(device_id):
         notes=data.get("notes", "")
     )
 
-    db.session.add(inspection)
-    db.session.commit()
+    db.session.add(inspection) #adding to the database
+    db.session.commit() #commit - this will only add it temporarily (as long as the session is in place) - so that it can be extracted in power autoamte within 10 minutes
     return "", 204
 
 #Endpoint for power automate - for inspections list
 
 @app.route("/inspections_all")
 def get_all_inspections():
-    records = Inspection.query.order_by(Inspection.timestamp.desc()).all()
+    records = Inspection.query.order_by(Inspection.timestamp.desc()).all() # Records = all the inspections in the session, descending timewise
 
-    result = []
-    for record in records:
-        device = Device.query.get(record.device_id)
+    result = [] #initialize the array of inspections
+    for record in records: #loop over the inspections
+        device = Device.query.get(record.device_id) #for each, get the device - since we need the device name, we get the device name of the record with the matching id (device_id)
         result.append({
             "id": record.id,
-            "device_id": record.device_id,
-            "device_name": device.name if device else "Unknown",
+            "device_id": record.device_id, 
+            "device_name": device.name, #We are getting the device name that matches the id
             "inspector": record.inspector,
-            "timestamp": record.timestamp.isoformat(),
+            "timestamp": record.timestamp.isoformat(), #to help power automate process the information
             "overall_condition": record.overall_condition,
             "screen_condition": record.screen_condition,
             "battery_condition": record.battery_condition,
@@ -187,7 +181,7 @@ def get_all_inspections():
             "notes": record.notes
         })
 
-    return jsonify(result)
+    return jsonify(result) #export as json to be imported properly in Power Automate
 
 ################################################################################################
 @app.route("/")

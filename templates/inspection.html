@@ -89,15 +89,15 @@
     <script>
     function submitInspection() {
         const inspector = document.getElementById("inspector").value.trim();
-        const overall_condition = document.getElementById("overall_condition").value;
+        const overall_condition = document.getElementById("overall_condition").value; //const means these values cannot be redefined
         const screen_condition = document.getElementById("screen_condition").value;
         const battery_condition = document.getElementById("battery_condition").value;
         const accessories_present = document.getElementById("accessories_present").value;
-        const functional_issues = document.getElementById("functional_issues").value; //trim() 
-        const notes = document.getElementById("notes").value; //trim()
+        const functional_issues = document.getElementById("functional_issues").value; 
+        const notes = document.getElementById("notes").value;
 
         if (!inspector || !overall_condition || !screen_condition || !battery_condition || !accessories_present) {
-            alert("Please fill in all required fields.");
+            alert("Please fill in all required fields."); //an alert is a pop up for the user
             return;
         }
 

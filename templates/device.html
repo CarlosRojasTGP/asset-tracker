@@ -22,13 +22,11 @@
 
         <p><strong>Last Updated (Used):</strong> {{ device.last_updated.strftime("%Y-%m-%d %I:%M %p") }}</p>
     </div>
-
     <div>
         <h3>Manage Device</h3>
-        <button onclick="checkOut()">Check Out</button>
-        <button onclick="checkIn()">Check In</button>
+        <button style="padding: 12px 20px; font-size: 14px; cursor: pointer;" onclick="checkOut()">Check Out</button>
+        <button style="padding: 12px 20px; font-size: 14px; cursor: pointer;" onclick="checkIn()">Check In</button>
     </div>
-
     <h3>Device QR Code</h3>
     <img src="{{ url_for('static', filename='qrcodes/' + device.name + '.png') }}" alt="QR Code Not Available">
 
@@ -37,7 +35,8 @@
 
     <h3>Inspections</h3>
     <a href="{{ url_for('inspection_page', device_id=device_id) }}">
-    <button>Start an inspection</button>
+        <button style="padding: 15px 30px; font-size: 18px; cursor: pointer;">
+            Start an inspection</button>
     </a>
     
     <h3>Check-in / Check-out History</h3>
