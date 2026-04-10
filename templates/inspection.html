@@ -30,74 +30,81 @@
     </div>
 
     <div class="field">
-        <label>Inspector Name <span class="required">*</span></label>
-        <input type="text" id="inspector" placeholder="Your full name" />
+        <label>Supervisor Name <span class="required">*</span></label>
+        <input type="text" id="inspector" placeholder="Supervisor's name" />
     </div>
 
     <div class="field">
-        <label>Overall Condition <span class="required">*</span></label>
-        <select id="overall_condition">
-            <option value="">— Select —</option>
-            <option>Good</option>
-            <option>Fair</option>
-            <option>Poor</option>
+        <label>Company: <span class="required">*</span></label>
+        <input type="text" id="company" placeholder="Company Name" />
+    </div>
+
+    <div class="field">
+        <label>Project: <span class="required">*</span></label>
+        <input type="text" id="project" placeholder="Project" />
+    </div>
+
+    <div class="field">
+        <label>Equipment #: <span class="required">*</span></label>
+        <input type="text" id="equipment#" placeholder="Equipment Number" />
+    </div>
+
+    <div class="field">
+        <label>Category: <span class="required">*</span></label>
+        <select id="category">
+            <option value="">— Choose One —</option>
+            <option>Forklift</option>
+            <option>Broderson</option>
+            <option>Sweeper</option>
+            <option>Elevated Work Platform</option>
+            <option>Other</option>
         </select>
     </div>
 
     <div class="field">
-        <label>Screen Condition <span class="required">*</span></label>
-        <select id="screen_condition">
-            <option value="">— Select —</option>
-            <option>Good</option>
-            <option>Damaged</option>
-            <option>N/A</option>
-        </select>
+        <label>If Other Please Specify: </label>
+        <textarea id="ifother" placeholder="If other, please specify"></textarea>
     </div>
 
     <div class="field">
-        <label>Battery Condition <span class="required">*</span></label>
-        <select id="battery_condition">
-            <option value="">— Select —</option>
-            <option>Good</option>
-            <option>Fair</option>
-            <option>Poor</option>
-            <option>N/A</option>
-        </select>
+        <label>Model # <span class="required">*</span></label>
+        <input type="text" id="model#" placeholder="Model Number" />
     </div>
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Here will be the content of the form
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     <div class="field">
-        <label>Accessories Present <span class="required">*</span></label>
-        <select id="accessories_present">
-            <option value="">— Select —</option>
-            <option>Yes</option>
-            <option>No</option>
-            <option>Partial</option>
-        </select>
+        <label>Operator's Name <span class="required">*</span></label>
+        <input type="text" id="operator" placeholder="Operator's name" />
     </div>
 
-    <div class="field">
-        <label>Functional Issues</label>
-        <textarea id="functional_issues" placeholder="Describe any functional problems (optional)"></textarea>
+        <div class="field">
+        <label>Initials <span class="required">*</span></label>
+        <input type="text" id="initials" placeholder="Initials" />
     </div>
 
-    <div class="field">
-        <label>Additional Notes</label>
-        <textarea id="notes" placeholder="Any other observations (optional)"></textarea>
-    </div>
+
+//update the submitInspection function, update the app.py, update the database
 
     <button type="button" onclick="submitInspection()">Submit Inspection</button>
 
     <script>
     function submitInspection() {
-        const inspector = document.getElementById("inspector").value.trim();
-        const overall_condition = document.getElementById("overall_condition").value; //const means these values cannot be redefined
-        const screen_condition = document.getElementById("screen_condition").value;
-        const battery_condition = document.getElementById("battery_condition").value;
-        const accessories_present = document.getElementById("accessories_present").value;
-        const functional_issues = document.getElementById("functional_issues").value; 
-        const notes = document.getElementById("notes").value;
+        const inspector = document.getElementById("inspector").value.trim(); //const means value cannot be redefined
+        const company = document.getElementById("company").value.trim();
+        const project = document.getElementById("project").value.trim();
+        const equipmentNum = document.getElementById("equipment#").value.trim();
+        const category = document.getElementById("category").value.trim();
+        const ifOther = document.getElementById("ifother").value.trim();
+        const modelNum = document.getElementById("model#").value.trim();
+        const operator = document.getElementById("operator").value.trim();
+        const initials = document.getElementById("initials").value.trim();
 
-        if (!inspector || !overall_condition || !screen_condition || !battery_condition || !accessories_present) {
+        if (!inspector || !company || !project || !equipmentNum || !category || !modelNum || !operator || !initials ) {
             alert("Please fill in all required fields."); //an alert is a pop up for the user
             return;
         }
@@ -107,12 +114,15 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 inspector,
-                overall_condition,
-                screen_condition,
-                battery_condition,
-                accessories_present,
-                functional_issues,
-                notes
+                company,
+                project,
+                equipmentNum,
+                category,
+                ifOther,
+                modelNum,
+                operator,
+                initials
+
             })
         }).then(response => {
             if (response.ok) {

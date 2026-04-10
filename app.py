@@ -132,7 +132,6 @@ def inspection_page(device_id):
     return render_template("inspection.html", device=device, device_id=device_id)
 
 
-
 @app.route("/device/<device_id>/inspection", methods=["POST"])
 def submit_inspection(device_id):
     device = Device.query.get(device_id) #Checking that the device_id is real and it matches some asset in the database
@@ -146,12 +145,14 @@ def submit_inspection(device_id):
         device_id=device_id,
         inspector=data.get("inspector"),
         timestamp=now,
-        overall_condition=data.get("overall_condition"),
-        screen_condition=data.get("screen_condition"),
-        battery_condition=data.get("battery_condition"),
-        accessories_present=data.get("accessories_present"),
-        functional_issues=data.get("functional_issues", ""),
-        notes=data.get("notes", "")
+        company=data.get("company"),
+        project=data.get("project"),
+        equipmentNum=data.get("equipmentnum"),
+        category=data.get("category"),
+        ifOther=data.get("ifother", ""),
+        modelNum=data.get("modelnum"),
+        operator=data.get("operator"),
+        initials=data.get("initials")
     )
 
     db.session.add(inspection) #adding to the database
@@ -173,13 +174,16 @@ def get_all_inspections():
             "device_name": device.name, #We are getting the device name that matches the id
             "inspector": record.inspector,
             "timestamp": record.timestamp.isoformat(), #to help power automate process the information
-            "overall_condition": record.overall_condition,
-            "screen_condition": record.screen_condition,
-            "battery_condition": record.battery_condition,
-            "accessories_present": record.accessories_present,
-            "functional_issues": record.functional_issues,
-            "notes": record.notes
+            "company": record.company,
+            "project": record.project,
+            "equipmentNum": record.equipmentnum,
+            "category": record.gategory,
+            "ifOther": record.ifother,
+            "modelNum": record.modelnum,
+            "operator": record.operator,
+            "initials": record.initials
         })
+            
 
     return jsonify(result) #export as json to be imported properly in Power Automate
 
