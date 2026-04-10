@@ -3,6 +3,7 @@ from datetime import datetime
 import pytz
 from pytz import timezone
 from models import db, Device, History, Inspection
+import json
 
 #Possible improvements would be to include the area or more relevant information into the website.
 
@@ -143,16 +144,16 @@ def submit_inspection(device_id):
 
     inspection = Inspection(
         device_id=device_id,
-        inspector=data.get("inspector"),
         timestamp=now,
-        company=data.get("company"),
-        project=data.get("project"),
-        equipmentNum=data.get("equipmentnum"),
-        category=data.get("category"),
-        ifOther=data.get("ifother", ""),
-        modelNum=data.get("modelnum"),
-        operator=data.get("operator"),
-        initials=data.get("initials")
+        company=data.get("company", ""),
+        project=data.get("project", ""),
+        equipment_num=data.get("equipment_num", ""),
+        category=data.get("category", ""),
+        if_other=data.get("if_other", ""),
+        model_num=data.get("model_num", ""),
+        operator=data.get("operator", ""),
+        initials=data.get("initials", ""),
+        checklist_json=json.dumps(data.get("checklist", []))
     )
 
     db.session.add(inspection) #adding to the database
@@ -170,18 +171,19 @@ def get_all_inspections():
         device = Device.query.get(record.device_id) #for each, get the device - since we need the device name, we get the device name of the record with the matching id (device_id)
         result.append({
             "id": record.id,
-            "device_id": record.device_id, 
-            "device_name": device.name, #We are getting the device name that matches the id
-            "inspector": record.inspector,
-            "timestamp": record.timestamp.isoformat(), #to help power automate process the information
+            "device_id": record.device_id,
+            "device_name": device.name if device else "Unknown",
+            "timestamp": record.timestamp.isoformat(),
             "company": record.company,
             "project": record.project,
-            "equipmentNum": record.equipmentnum,
-            "category": record.gategory,
-            "ifOther": record.ifother,
-            "modelNum": record.modelnum,
+            "equipment_num": record.equipment_num,
+            "category": record.category,
+            "if_other": record.if_other,
+            "model_num": record.model_num,
             "operator": record.operator,
-            "initials": record.initials
+            "initials": record.initials,
+            # Parsed back to array so Power Automate can iterate it directly
+            "checklist": json.loads(record.checklist_json) if record.checklist_json else []
         })
             
 

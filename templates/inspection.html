@@ -4,135 +4,727 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inspection – {{ device.name }}</title>
     <style>
-        body { font-family: Arial; padding: 20px; max-width: 500px; }
-        .info { border: 2px solid #1d889b; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
-        .field { margin-bottom: 16px; }
-        label { display: block; font-weight: bold; margin-bottom: 4px; }
-        select, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box; }
-        textarea { resize: vertical; min-height: 80px; }
-        input[type="text"] { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box; }
-        button[type="button"] { background: #1d889b; color: white; border: none; padding: 10px 24px; border-radius: 6px; font-size: 15px; cursor: pointer; }
-        button[type="button"]:hover { background: #166e7e; }
-        .back { margin-bottom: 16px; display: inline-block; color: #1d889b; text-decoration: none; }
-        .required { color: #c0392b; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        /* ── Header bar ── */
+        .topbar {
+            background: #1d889b;
+            color: white;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .topbar a { color: white; text-decoration: none; font-size: 20px; }
+        .topbar h1 { font-size: 17px; font-weight: 600; }
+        .topbar .sub { font-size: 13px; opacity: 0.85; }
+
+        /* ── Shared card ── */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 16px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        /* ── Form fields ── */
+        .field { margin-bottom: 18px; }
+        .field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .field input, .field select, .field textarea {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 16px;
+            border: 1.5px solid #ddd;
+            border-radius: 8px;
+            background: #fafafa;
+            color: #222;
+            appearance: none;
+        }
+        .field input:focus, .field select:focus, .field textarea:focus {
+            outline: none;
+            border-color: #1d889b;
+            background: white;
+        }
+        .field textarea { resize: vertical; min-height: 80px; }
+        .required { color: #e05; }
+
+        /* ── Primary button ── */
+        .btn-primary {
+            width: 100%;
+            padding: 15px;
+            background: #1d889b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        .btn-primary:active { background: #166e7e; }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            background: white;
+            color: #1d889b;
+            border: 2px solid #1d889b;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* ── Screen toggling ── */
+        .screen { display: none; }
+        .screen.active { display: block; }
+
+        /* ── Progress bar ── */
+        .progress-wrap {
+            margin: 16px 16px 0;
+        }
+        .progress-label {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .progress-bar {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #1d889b;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* ── Checklist card ── */
+        .section-badge {
+            display: inline-block;
+            background: #e6f6f8;
+            color: #1d889b;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+        .item-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        /* ── Day toggles ── */
+        .day-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 10px;
+        }
+        .day-toggles {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+        .day-btn {
+            flex: 1;
+            min-width: 36px;
+            padding: 10px 4px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            font-size: 13px;
+            font-weight: 600;
+            color: #888;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.15s;
+        }
+        .day-btn.selected {
+            background: #1d889b;
+            border-color: #1d889b;
+            color: white;
+        }
+
+        /* ── Yes/No big buttons ── */
+        .yn-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 10px;
+        }
+        .yn-group {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+        .yn-btn {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: white;
+            font-size: 16px;
+            font-weight: 600;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .yn-btn.selected-yes {
+            background: #e6f6f0;
+            border-color: #27ae60;
+            color: #27ae60;
+        }
+        .yn-btn.selected-no {
+            background: #fef0f0;
+            border-color: #e05;
+            color: #e05;
+        }
+
+        /* ── Conditional repair fields ── */
+        .repair-fields {
+            background: #fff8f0;
+            border: 1.5px solid #f0c080;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 22px;
+        }
+        .repair-fields .field { margin-bottom: 14px; }
+        .repair-fields .field:last-child { margin-bottom: 0; }
+
+        /* ── Nav buttons ── */
+        .nav-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .nav-row .btn-back {
+            flex: 1;
+            padding: 14px;
+            background: white;
+            color: #555;
+            border: 1.5px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .nav-row .btn-next {
+            flex: 2;
+            padding: 14px;
+            background: #1d889b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .nav-row .btn-next:active { background: #166e7e; }
+
+        /* ── Summary ── */
+        .summary-section { margin-bottom: 24px; }
+        .summary-section-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #1d889b;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1.5px solid #e6f6f8;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            gap: 12px;
+        }
+        .summary-row:last-child { border-bottom: none; }
+        .summary-item-name { font-size: 14px; color: #333; flex: 1; }
+        .summary-days { font-size: 13px; color: #888; }
+        .repair-tag {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #fef0f0;
+            color: #e05;
+        }
+        .ok-tag {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #e6f6f0;
+            color: #27ae60;
+        }
+        .skip-tag {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #f0f0f0;
+            color: #999;
+        }
+
+        /* ── Header summary in summary screen ── */
+        .header-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .header-summary-item { font-size: 13px; color: #555; }
+        .header-summary-item strong { color: #222; display: block; font-size: 14px; }
     </style>
 </head>
 <body>
-    <a class="back" href="{{ url_for('device_page', device_id=device_id) }}">← Back to {{ device.name }}</a>
 
-    <h1>Inspection</h1>
-
-    <div class="info">
-        <p><strong>Device:</strong> {{ device.name }}</p>
-        <p><strong>Model:</strong> {{ device.model }}</p>
-        <p><strong>Serial #:</strong> {{ device.serial }}</p>
-        <p><strong>Equipment #:</strong> {{ device.id }}</p>
+<!-- ════════════════════════════════════════
+     SCREEN 1 — HEADER FIELDS
+════════════════════════════════════════ -->
+<div id="screen-header" class="screen active">
+    <div class="topbar">
+        <a href="{{ url_for('device_page', device_id=device_id) }}">←</a>
+        <div>
+            <div class="sub">Inspection</div>
+            <h1>{{ device.name }}</h1>
+        </div>
     </div>
 
-    <div class="field">
-        <label>Supervisor Name <span class="required">*</span></label>
-        <input type="text" id="inspector" placeholder="Supervisor's name" />
-    </div>
-
-    <div class="field">
-        <label>Company: <span class="required">*</span></label>
-        <input type="text" id="company" placeholder="Company Name" />
-    </div>
-
-    <div class="field">
-        <label>Project: <span class="required">*</span></label>
-        <input type="text" id="project" placeholder="Project" />
-    </div>
-
-    <div class="field">
-        <label>Equipment #: <span class="required">*</span></label>
-        <input type="text" id="equipment#" placeholder="Equipment Number" />
-    </div>
-
-    <div class="field">
-        <label>Category: <span class="required">*</span></label>
-        <select id="category">
-            <option value="">— Choose One —</option>
-            <option>Forklift</option>
-            <option>Broderson</option>
-            <option>Sweeper</option>
-            <option>Elevated Work Platform</option>
-            <option>Other</option>
-        </select>
-    </div>
-
-    <div class="field">
-        <label>If Other Please Specify: </label>
-        <textarea id="ifother" placeholder="If other, please specify"></textarea>
-    </div>
-
-    <div class="field">
-        <label>Model # <span class="required">*</span></label>
-        <input type="text" id="model#" placeholder="Model Number" />
-    </div>
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// Here will be the content of the form
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    <div class="field">
-        <label>Operator's Name <span class="required">*</span></label>
-        <input type="text" id="operator" placeholder="Operator's name" />
-    </div>
-
+    <div class="card">
         <div class="field">
-        <label>Initials <span class="required">*</span></label>
-        <input type="text" id="initials" placeholder="Initials" />
+            <label>Company <span class="required">*</span></label>
+            <input type="text" id="company" placeholder="Company name" />
+        </div>
+        <div class="field">
+            <label>Project <span class="required">*</span></label>
+            <input type="text" id="project" placeholder="Project name" />
+        </div>
+        <div class="field">
+            <label>Equipment # <span class="required">*</span></label>
+            <input type="text" id="equipment_num" placeholder="Equipment number" value="{{ device.id }}" />
+        </div>
+        <div class="field">
+            <label>Category <span class="required">*</span></label>
+            <select id="category" onchange="toggleOther()">
+                <option value="">— Choose one —</option>
+                <option>Forklift</option>
+                <option>Broderson</option>
+                <option>Sweeper</option>
+                <option>Elevated Work Platform</option>
+                <option>Other</option>
+            </select>
+        </div>
+        <div class="field" id="other-field" style="display:none;">
+            <label>If other, please specify</label>
+            <input type="text" id="if_other" placeholder="Describe equipment" />
+        </div>
+        <div class="field">
+            <label>Model # <span class="required">*</span></label>
+            <input type="text" id="model_num" placeholder="Model number" value="{{ device.model }}" />
+        </div>
+        <div class="field">
+            <label>Operator's Name <span class="required">*</span></label>
+            <input type="text" id="operator" placeholder="Full name" />
+        </div>
+        <div class="field">
+            <label>Initials <span class="required">*</span></label>
+            <input type="text" id="initials" placeholder="e.g. JD" style="width:120px;" />
+        </div>
+
+        <button class="btn-primary" onclick="startChecklist()">Start Inspection →</button>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SCREEN 2 — CHECKLIST CARDS
+════════════════════════════════════════ -->
+<div id="screen-checklist" class="screen">
+    <div class="topbar">
+        <div>
+            <div class="sub">Inspection</div>
+            <h1 id="cl-device-name">{{ device.name }}</h1>
+        </div>
     </div>
 
+    <div class="progress-wrap">
+        <div class="progress-label">
+            <span id="progress-text">Item 1 of 35</span>
+            <span id="progress-pct">0%</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+        </div>
+    </div>
 
-//update the submitInspection function, update the app.py, update the database
+    <div class="card" id="checklist-card">
+        <div class="section-badge" id="cl-section">Pre-Start Check</div>
+        <div class="item-title" id="cl-item">Fuel Level / Oil Level</div>
 
-    <button type="button" onclick="submitInspection()">Submit Inspection</button>
+        <div class="day-label">Days checked</div>
+        <div class="day-toggles" id="day-toggles">
+            <button class="day-btn" onclick="toggleDay(this,'Sun')">Sun</button>
+            <button class="day-btn" onclick="toggleDay(this,'Mon')">Mon</button>
+            <button class="day-btn" onclick="toggleDay(this,'Tue')">Tue</button>
+            <button class="day-btn" onclick="toggleDay(this,'Wed')">Wed</button>
+            <button class="day-btn" onclick="toggleDay(this,'Thu')">Thu</button>
+            <button class="day-btn" onclick="toggleDay(this,'Fri')">Fri</button>
+            <button class="day-btn" onclick="toggleDay(this,'Sat')">Sat</button>
+        </div>
 
-    <script>
-    function submitInspection() {
-        const inspector = document.getElementById("inspector").value.trim(); //const means value cannot be redefined
-        const company = document.getElementById("company").value.trim();
-        const project = document.getElementById("project").value.trim();
-        const equipmentNum = document.getElementById("equipment#").value.trim();
-        const category = document.getElementById("category").value.trim();
-        const ifOther = document.getElementById("ifother").value.trim();
-        const modelNum = document.getElementById("model#").value.trim();
-        const operator = document.getElementById("operator").value.trim();
-        const initials = document.getElementById("initials").value.trim();
+        <div class="yn-label">Needs repair?</div>
+        <div class="yn-group">
+            <button class="yn-btn" id="yn-yes" onclick="setRepair('Yes')">Yes</button>
+            <button class="yn-btn" id="yn-no" onclick="setRepair('No')">No</button>
+        </div>
 
-        if (!inspector || !company || !project || !equipmentNum || !category || !modelNum || !operator || !initials ) {
-            alert("Please fill in all required fields."); //an alert is a pop up for the user
-            return;
-        }
+        <div class="repair-fields" id="repair-fields" style="display:none;">
+            <div class="field">
+                <label>Reported to supervisor?</label>
+                <select id="cl-reported">
+                    <option value="">— Choose —</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Supervisor initials</label>
+                <input type="text" id="cl-sup-initials" placeholder="e.g. AB" />
+            </div>
+            <div class="field">
+                <label>Deficiency corrected sign-off</label>
+                <input type="text" id="cl-corrected" placeholder="Attach proof or note" />
+            </div>
+        </div>
 
-        fetch(window.location.pathname, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                inspector,
-                company,
-                project,
-                equipmentNum,
-                category,
-                ifOther,
-                modelNum,
-                operator,
-                initials
+        <div class="nav-row">
+            <button class="nav-row btn-back" onclick="prevItem()">← Back</button>
+            <button class="nav-row btn-next" onclick="nextItem()" id="btn-next">Next →</button>
+        </div>
+    </div>
+</div>
 
-            })
-        }).then(response => {
-            if (response.ok) {
-                alert("Inspection submitted successfully.");
-                window.location.href = "{{ url_for('device_page', device_id=device_id) }}";
-            } else {
-                alert("Something went wrong. Please try again.");
-            }
-        });
+<!-- ════════════════════════════════════════
+     SCREEN 3 — SUMMARY
+════════════════════════════════════════ -->
+<div id="screen-summary" class="screen">
+    <div class="topbar">
+        <div>
+            <div class="sub">Review before submitting</div>
+            <h1>{{ device.name }}</h1>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="header-summary" id="summary-header"></div>
+    </div>
+
+    <div class="card" id="summary-checklist"></div>
+
+    <div style="margin: 0 16px;">
+        <button class="btn-secondary" onclick="goBackToChecklist()">← Edit answers</button>
+        <button class="btn-primary" onclick="submitInspection()">Submit inspection</button>
+    </div>
+</div>
+
+<script>
+// ════════════════════════════════════════
+// CHECKLIST DATA
+// ════════════════════════════════════════
+const CHECKLIST = [
+    { section: "Pre-Start Check", item: "Fuel Level / Oil Level" },
+    { section: "Pre-Start Check", item: "Fluid Levels" },
+    { section: "Pre-Start Check", item: "Fuel Lines / Connections / Status (EWP)" },
+    { section: "Pre-Start Check", item: "Loose Bolts, Clips, etc." },
+    { section: "Pre-Start Check", item: "Wheels and Tires" },
+    { section: "Pre-Start Check", item: "Forks - move freely, defects (Forklift)" },
+    { section: "Pre-Start Check", item: "Hoses Secure, Fluid Leaks" },
+    { section: "Pre-Start Check", item: "Horn, Lights, Backup Alarm" },
+    { section: "Pre-Start Check", item: "Operational" },
+    { section: "Pre-Start Check", item: "Cable Check (Broderson)" },
+    { section: "Pre-Start Check", item: "Cracks in Scissor Boom (EWP)" },
+    { section: "Pre-Start Check", item: "Operator's Manual" },
+    { section: "Pre-Start Check", item: "Seat Belts" },
+    { section: "Pre-Start Check", item: "Fire Extinguisher" },
+    { section: "Operation Pre-Use Check", item: "Foot Brake Operational" },
+    { section: "Operation Pre-Use Check", item: "Parking Brake Operational" },
+    { section: "Operation Pre-Use Check", item: "Clutch / Gear Shift Operational" },
+    { section: "Operation Pre-Use Check", item: "Steering Operational" },
+    { section: "Operation Pre-Use Check", item: "Boom / Mast Operational - Test thru full hoist and full tilt" },
+    { section: "Operation Pre-Use Check", item: "Boom / Outrigger Operational" },
+    { section: "Platform Inspection Checked for EWP", item: "Handrails, Safety Chains, Bars" },
+    { section: "Platform Inspection Checked for EWP", item: "Clean & Free of Obstructions" },
+    { section: "Controls - Check All 1", item: "Functions & Indicators - must be legible" },
+    { section: "Controls - Check All 1", item: "Motion Warning Devices" },
+    { section: "Controls - Check All 1", item: "Documentation & Handbook" },
+    { section: "Controls - Check All 2", item: "Alarm / Warning Devices / Lights" },
+    { section: "Controls - Check All 2", item: "Oil Leaks" },
+    { section: "Controls - Check All 2", item: "Lift Cylinder Condition" },
+    { section: "Controls - Check All 2", item: "Hydraulic Fluid Level" },
+    { section: "Controls - Check All 2", item: "Emergency Lowering Valve" },
+    { section: "Controls - Check All 2", item: "Battery Fluid Level" },
+    { section: "Controls - Check All 2", item: "Battery Cables" },
+    { section: "Controls - Check All 2", item: "Visual Check of Battery Casing" }
+];
+
+const TOTAL = CHECKLIST.length;
+
+// ════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════
+let currentIndex = 0;
+let answers = CHECKLIST.map(() => ({
+    days_checked: [],
+    needs_repair: "",
+    reported: "",
+    sup_initials: "",
+    corrected_signoff: ""
+}));
+
+// Header state
+let headerData = {};
+
+// ════════════════════════════════════════
+// SCREEN HELPERS
+// ════════════════════════════════════════
+function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0);
+}
+
+// ════════════════════════════════════════
+// HEADER SCREEN
+// ════════════════════════════════════════
+function toggleOther() {
+    const cat = document.getElementById('category').value;
+    document.getElementById('other-field').style.display = cat === 'Other' ? 'block' : 'none';
+}
+
+function startChecklist() {
+    const company = document.getElementById('company').value.trim();
+    const project = document.getElementById('project').value.trim();
+    const equipment_num = document.getElementById('equipment_num').value.trim();
+    const category = document.getElementById('category').value;
+    const model_num = document.getElementById('model_num').value.trim();
+    const operator = document.getElementById('operator').value.trim();
+    const initials = document.getElementById('initials').value.trim();
+
+    if (!company || !project || !equipment_num || !category || !model_num || !operator || !initials) {
+        alert("Please fill in all required fields.");
+        return;
     }
-    </script>
+
+    headerData = {
+        company, project, equipment_num, category,
+        if_other: document.getElementById('if_other').value.trim(),
+        model_num, operator, initials
+    };
+
+    currentIndex = 0;
+    renderCard(currentIndex);
+    showScreen('screen-checklist');
+}
+
+// ════════════════════════════════════════
+// CHECKLIST CARD
+// ════════════════════════════════════════
+function renderCard(index) {
+    const entry = CHECKLIST[index];
+    const saved = answers[index];
+
+    document.getElementById('cl-section').textContent = entry.section;
+    document.getElementById('cl-item').textContent = entry.item;
+
+    // Progress
+    const pct = Math.round((index / TOTAL) * 100);
+    document.getElementById('progress-text').textContent = `Item ${index + 1} of ${TOTAL}`;
+    document.getElementById('progress-pct').textContent = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    // Last item label
+    document.getElementById('btn-next').textContent = index === TOTAL - 1 ? 'Review →' : 'Next →';
+
+    // Restore day toggles
+    document.querySelectorAll('.day-btn').forEach(btn => {
+        btn.classList.toggle('selected', saved.days_checked.includes(btn.textContent));
+    });
+
+    // Restore needs repair
+    document.getElementById('yn-yes').className = 'yn-btn' + (saved.needs_repair === 'Yes' ? ' selected-yes' : '');
+    document.getElementById('yn-no').className = 'yn-btn' + (saved.needs_repair === 'No' ? ' selected-no' : '');
+    document.getElementById('repair-fields').style.display = saved.needs_repair === 'Yes' ? 'block' : 'none';
+
+    // Restore repair sub-fields
+    document.getElementById('cl-reported').value = saved.reported || '';
+    document.getElementById('cl-sup-initials').value = saved.sup_initials || '';
+    document.getElementById('cl-corrected').value = saved.corrected_signoff || '';
+}
+
+function toggleDay(btn, day) {
+    btn.classList.toggle('selected');
+    // sync into answers immediately (will be saved on next/back)
+}
+
+function setRepair(val) {
+    document.getElementById('yn-yes').className = 'yn-btn' + (val === 'Yes' ? ' selected-yes' : '');
+    document.getElementById('yn-no').className = 'yn-btn' + (val === 'No' ? ' selected-no' : '');
+    document.getElementById('repair-fields').style.display = val === 'Yes' ? 'block' : 'none';
+}
+
+function saveCurrentCard() {
+    const days = [];
+    document.querySelectorAll('.day-btn.selected').forEach(b => days.push(b.textContent));
+
+    const repairYes = document.getElementById('yn-yes').classList.contains('selected-yes');
+    const repairNo = document.getElementById('yn-no').classList.contains('selected-no');
+    const needs_repair = repairYes ? 'Yes' : (repairNo ? 'No' : '');
+
+    answers[currentIndex] = {
+        days_checked: days,
+        needs_repair,
+        reported: document.getElementById('cl-reported').value,
+        sup_initials: document.getElementById('cl-sup-initials').value.trim(),
+        corrected_signoff: document.getElementById('cl-corrected').value.trim()
+    };
+}
+
+function nextItem() {
+    saveCurrentCard();
+    if (currentIndex < TOTAL - 1) {
+        currentIndex++;
+        renderCard(currentIndex);
+        window.scrollTo(0, 0);
+    } else {
+        buildSummary();
+        showScreen('screen-summary');
+    }
+}
+
+function prevItem() {
+    saveCurrentCard();
+    if (currentIndex > 0) {
+        currentIndex--;
+        renderCard(currentIndex);
+        window.scrollTo(0, 0);
+    } else {
+        showScreen('screen-header');
+    }
+}
+
+// ════════════════════════════════════════
+// SUMMARY
+// ════════════════════════════════════════
+function buildSummary() {
+    // Header block
+    const h = headerData;
+    document.getElementById('summary-header').innerHTML = `
+        <div class="header-summary-item"><strong>${h.company}</strong>Company</div>
+        <div class="header-summary-item"><strong>${h.project}</strong>Project</div>
+        <div class="header-summary-item"><strong>${h.equipment_num}</strong>Equipment #</div>
+        <div class="header-summary-item"><strong>${h.category}${h.if_other ? ' – ' + h.if_other : ''}</strong>Category</div>
+        <div class="header-summary-item"><strong>${h.model_num}</strong>Model #</div>
+        <div class="header-summary-item"><strong>${h.operator} (${h.initials})</strong>Operator</div>
+    `;
+
+    // Checklist grouped by section
+    const sections = [...new Set(CHECKLIST.map(c => c.section))];
+    let html = '';
+    sections.forEach(section => {
+        html += `<div class="summary-section">`;
+        html += `<div class="summary-section-title">${section}</div>`;
+        CHECKLIST.forEach((entry, i) => {
+            if (entry.section !== section) return;
+            const a = answers[i];
+            const daysStr = a.days_checked.length ? a.days_checked.join(', ') : '—';
+            const tag = a.needs_repair === 'Yes'
+                ? '<span class="repair-tag">Repair needed</span>'
+                : a.needs_repair === 'No'
+                    ? '<span class="ok-tag">OK</span>'
+                    : '<span class="skip-tag">Not answered</span>';
+            html += `
+                <div class="summary-row">
+                    <div>
+                        <div class="summary-item-name">${entry.item}</div>
+                        <div class="summary-days">${daysStr}</div>
+                    </div>
+                    ${tag}
+                </div>`;
+        });
+        html += `</div>`;
+    });
+    document.getElementById('summary-checklist').innerHTML = html;
+}
+
+function goBackToChecklist() {
+    currentIndex = TOTAL - 1;
+    renderCard(currentIndex);
+    showScreen('screen-checklist');
+}
+
+// ════════════════════════════════════════
+// SUBMIT
+// ════════════════════════════════════════
+function submitInspection() {
+    const checklist = CHECKLIST.map((entry, i) => ({
+        section: entry.section,
+        item: entry.item,
+        days_checked: answers[i].days_checked,
+        needs_repair: answers[i].needs_repair,
+        reported: answers[i].reported,
+        sup_initials: answers[i].sup_initials,
+        corrected_signoff: answers[i].corrected_signoff
+    }));
+
+    fetch(window.location.pathname, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...headerData, checklist })
+    }).then(response => {
+        if (response.ok) {
+            alert("Inspection submitted successfully.");
+            window.location.href = "{{ url_for('device_page', device_id=device_id) }}";
+        } else {
+            alert("Something went wrong. Please try again.");
+        }
+    });
+}
+</script>
 </body>
 </html>

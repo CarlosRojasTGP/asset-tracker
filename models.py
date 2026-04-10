@@ -37,12 +37,16 @@ class Inspection(db.Model):
     __tablename__ = 'inspections'
     id = db.Column(db.Integer, primary_key=True)
     device_id = db.Column(db.String, db.ForeignKey('devices.id'))
-    inspector = db.Column(db.String)           # name of person doing inspection
     timestamp = db.Column(db.DateTime, default=current_time)
-    overall_condition = db.Column(db.String)   # Good / Fair / Poor
-    screen_condition = db.Column(db.String)    # Good / Damaged / N/A
-    battery_condition = db.Column(db.String)   # Good / Fair / Poor / N/A
-    accessories_present = db.Column(db.String) # Yes / No / Partial
-    functional_issues = db.Column(db.String)   # free text
-    notes = db.Column(db.String)               # free text
+    # Header fields
+    company = db.Column(db.String)
+    project = db.Column(db.String)
+    equipment_num = db.Column(db.String)
+    category = db.Column(db.String)
+    if_other = db.Column(db.String)
+    model_num = db.Column(db.String)
+    operator = db.Column(db.String)
+    initials = db.Column(db.String)
+    # Checklist stored as JSON string
+    checklist_json = db.Column(db.Text)
     
