@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--This is to help auto scale the page to the device usedS-->
     <title>Inspection – {{ device.name }}</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -282,10 +282,15 @@
 </div>
 
 <div style="margin: 0 16px 16px;">
-    <button class="btn-primary" onclick="submitInspection()">Submit Inspection</button>
+    <button class="btn-primary" onclick="submitInspection(annual)">Submit Inspection</button>
+</div>
+
+<div style="margin: 0 16px 16px;">
+    <button class="btn-primary" onclick="submitAnnualInspection()">Submit Annual Inspection</button>
 </div>
 
 <script>
+const annual = False
 const CHECKLIST = [
     { section: "Pre-Start Check", item: "Fuel Level / Oil Level" },
     { section: "Pre-Start Check", item: "Fluid Levels" },
@@ -444,7 +449,7 @@ function toggleOther() {
     document.getElementById('other-field').style.display = cat === 'Other' ? 'block' : 'none';
 }
 
-function submitInspection() {
+function submitInspection(annual) {
     const company = document.getElementById('company').value.trim();
     const project = document.getElementById('project').value.trim();
     const equipment_num = document.getElementById('equipment_num').value.trim();
@@ -461,7 +466,7 @@ function submitInspection() {
     const payload = {
         company, project, equipment_num, category,
         if_other: document.getElementById('if_other').value.trim(),
-        model_num, operator, initials,
+        model_num, operator, initials,annual,
         checklist: readChecklist()
     };
 
@@ -477,6 +482,11 @@ function submitInspection() {
             alert("Something went wrong. Please try again.");
         }
     });
+}
+
+function submitAnnualInspection() {
+    annual = True;
+    submitInspection(annual);
 }
 
 buildChecklist();

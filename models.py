@@ -49,4 +49,5 @@ class Inspection(db.Model):
     initials = db.Column(db.String)
     # Checklist stored as JSON string
     checklist_json = db.Column(db.Text)
+    annual = db.Column(db.Boolean, default=False)
     
