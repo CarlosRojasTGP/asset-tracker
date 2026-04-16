@@ -282,15 +282,14 @@
 </div>
 
 <div style="margin: 0 16px 16px;">
-    <button class="btn-primary" onclick="submitInspection(annual)">Submit Inspection</button>
+    <button class="btn-primary" onclick="submitInspection(false)">Submit Inspection</button>
 </div>
 
 <div style="margin: 0 16px 16px;">
-    <button class="btn-primary" onclick="submitAnnualInspection()">Submit Annual Inspection</button>
+    <button class="btn-primary" onclick="submitAnnualInspection(true)">Submit Annual Inspection</button>
 </div>
 
 <script>
-const annual = False
 const CHECKLIST = [
     { section: "Pre-Start Check", item: "Fuel Level / Oil Level" },
     { section: "Pre-Start Check", item: "Fluid Levels" },
@@ -466,7 +465,7 @@ function submitInspection(annual) {
     const payload = {
         company, project, equipment_num, category,
         if_other: document.getElementById('if_other').value.trim(),
-        model_num, operator, initials,annual,
+        model_num, operator, initials, annual,
         checklist: readChecklist()
     };
 
@@ -482,11 +481,6 @@ function submitInspection(annual) {
             alert("Something went wrong. Please try again.");
         }
     });
-}
-
-function submitAnnualInspection() {
-    annual = True;
-    submitInspection(annual);
 }
 
 buildChecklist();
