@@ -266,6 +266,11 @@
         <label>Operator's Name <span class="required">*</span></label>
         <input type="text" id="operator" placeholder="Full name" />
     </div>
+
+    <div class="field">
+        <label>Inspector's Job Title <span class="required">*</span></label>
+        <input type="text" id="inspector_title" placeholder="Full name" />
+    </div>
     <div class="field">
         <label>Initials <span class="required">*</span></label>
         <input type="text" id="initials" placeholder="e.g. JD" />
@@ -455,9 +460,10 @@ function submitInspection(annual) {
     const category = document.getElementById('category').value;
     const model_num = document.getElementById('model_num').value.trim();
     const operator = document.getElementById('operator').value.trim();
+    const inspector_title = document.getElementById('inspector_title').value.trim();
     const initials = document.getElementById('initials').value.trim();
 
-    if (!company || !project || !equipment_num || !category || !model_num || !operator || !initials) {
+    if (!company || !project || !equipment_num || !category || !model_num || !operator || !initials || !inspector_title) {
         alert("Please fill in all required fields at the top.");
         return;
     }
@@ -465,7 +471,7 @@ function submitInspection(annual) {
     const payload = {
         company, project, equipment_num, category,
         if_other: document.getElementById('if_other').value.trim(),
-        model_num, operator, initials, annual,
+        model_num, operator, inspector_title, initials, annual,
         checklist: readChecklist()
     };
 

@@ -152,6 +152,7 @@ def submit_inspection(device_id):
         if_other=data.get("if_other", ""),
         model_num=data.get("model_num", ""),
         operator=data.get("operator", ""),
+        inspector_title=data.get("inspector_title",""),
         initials=data.get("initials", ""),
         checklist_json=json.dumps(data.get("checklist", [])),
         annual=data.get("annual", False)
@@ -182,6 +183,7 @@ def get_all_inspections():
             "if_other": record.if_other,
             "model_num": record.model_num,
             "operator": record.operator,
+            "inspector_title": record.inspector_title,
             "initials": record.initials,
             "annual": record.annual, #For certificate generation
             # Parsed back to array so Power Automate can iterate it directly
