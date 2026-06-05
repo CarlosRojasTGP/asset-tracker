@@ -269,7 +269,11 @@
 
     <div class="field">
         <label>Inspector's Job Title <span class="required">*</span></label>
-        <input type="text" id="inspector_title" placeholder="Full name" />
+        <input type="text" id="inspector_title" placeholder="Job Title" />
+    </div>
+    <div class="field">
+        <label>Inspector's Email <span class="required">*</span></label>
+        <input type="text" id="inspector_email" placeholder="The Annual Certificate will be sent to this address (if applicable)" />
     </div>
     <div class="field">
         <label>Initials <span class="required">*</span></label>
@@ -461,9 +465,10 @@ function submitInspection(annual) {
     const model_num = document.getElementById('model_num').value.trim();
     const operator = document.getElementById('operator').value.trim();
     const inspector_title = document.getElementById('inspector_title').value.trim();
+    const inspector_email = document.getElementById('inspector_email').value.trim();
     const initials = document.getElementById('initials').value.trim();
 
-    if (!company || !project || !equipment_num || !category || !model_num || !operator || !initials || !inspector_title) {
+    if (!company || !project || !equipment_num || !category || !model_num || !operator || !initials || !inspector_title || inspector_email) {
         alert("Please fill in all required fields at the top.");
         return;
     }
@@ -471,7 +476,7 @@ function submitInspection(annual) {
     const payload = {
         company, project, equipment_num, category,
         if_other: document.getElementById('if_other').value.trim(),
-        model_num, operator, inspector_title, initials, annual,
+        model_num, operator, inspector_title, inspector_email, initials, annual,
         checklist: readChecklist()
     };
 

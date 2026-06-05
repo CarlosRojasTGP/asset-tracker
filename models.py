@@ -47,6 +47,7 @@ class Inspection(db.Model):
     model_num = db.Column(db.String)
     operator = db.Column(db.String)
     inspector_title = db.Column(db.String)
+    inspector_email = db.Column(db.String)
     initials = db.Column(db.String)
     # Checklist stored as JSON string
     checklist_json = db.Column(db.Text)
