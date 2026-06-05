@@ -468,7 +468,7 @@ function submitInspection(annual) {
     const inspector_email = document.getElementById('inspector_email').value.trim();
     const initials = document.getElementById('initials').value.trim();
 
-    if (!company || !project || !equipment_num || !category || !model_num || !operator || !initials || !inspector_title || inspector_email) {
+    if (!company || !project || !equipment_num || !category || !model_num || !operator || !initials || !inspector_title || !inspector_email) {
         alert("Please fill in all required fields at the top.");
         return;
     }
