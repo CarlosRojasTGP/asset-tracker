@@ -486,7 +486,7 @@ function submitInspection(annual) {
         body: JSON.stringify(payload)
     }).then(response => {
         if (response.ok) {
-            alert("Inspection submitted successfully.");
+            alert("Inspection submitted successfully. If you submitted an annual inspection, please allow about 3 minutes for the certificate to arrive in your inbox.");
             window.location.href = "{{ url_for('device_page', device_id=device_id) }}";
         } else {
             alert("Something went wrong. Please try again.");
